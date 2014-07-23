@@ -44,7 +44,5 @@ function createProxy() {
 }
 
 
-module.exports = {
-    setupProxy: setupProxy
-  , proxy: createProxy
-}
+module.exports = createProxy
+module.exports.setup = setupProxy

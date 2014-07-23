@@ -1,1 +1,1 @@
-module.exports = require('../common').proxy()
+module.exports = require('../server-common')

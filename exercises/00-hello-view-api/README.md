@@ -6,7 +6,7 @@ View School is a *go-at-your-own-pace* workshop devoted to teaching you how to u
 
 In this lesson, we'll get you setup with a brand new Box View API account.
 
-## Here's what you need to do
+## Your Task
 
 1. [Create a Box account](https://box.com/developer_signup) (or [login](http://box.com/developers/services) if you already have one)
 2. Once you're logged in, click "get started" to create a new Box application

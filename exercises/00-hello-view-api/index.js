@@ -4,7 +4,7 @@ var xhr = require('xhr')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
-var clickHTML = fs.readFileSync(__dirname + '/../click.html')
+var clickHTML = fs.readFileSync(__dirname + '/../click.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
