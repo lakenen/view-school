@@ -8,8 +8,5 @@ process.chdir(answers)
 workshopper({
   exercises: require('./exercises')
   , exercisesDir: path.resolve(__dirname, 'exercises')
-  , title: 'Example Workshopper'
-  , browserifyTransforms: [
-    require.resolve('curlify')
-  ]
+  , title: 'View School'
 })

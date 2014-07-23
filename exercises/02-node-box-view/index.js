@@ -4,6 +4,8 @@ var xhr = require('xhr')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
+var clickHTML = fs.readFileSync(__dirname + '/../click.html')
+var indexHTML = fs.readFileSync(__dirname + '/index.html')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 var exEl = document.querySelector('.exercise-content')
@@ -23,13 +25,18 @@ function test(done) {
 
   require(list)(function (docs) {
     exEl.querySelector('.response').innerText = JSON.stringify(docs, true, 2)
-    console.log(docs)
-    done(null, false)
+    if (!docs) {
+      return done(new Error('Looks like you did not return the documents'), false)
+    }
+    if (!docs.length) {
+      return done(new Error('Oops, I don\'t see any docs (did you upload one yet?)'), false)
+    }
+    done(null, true)
   })
 }
 
 function setup(done) {
-  exEl.innerHTML = require('../click.html') + require('./index.html')
+  exEl.innerHTML = clickHTML + indexHTML
   xhr('/' + exName + '/proxy', function(err, res, body) {
     if (err) {
       return done()

@@ -6,15 +6,18 @@ var util = require('util')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
+var clickHTML = fs.readFileSync(__dirname + '/../click.html')
+var indexHTML = fs.readFileSync(__dirname + '/index.html')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
+var DOC_URL = 'https://view-api.box.com/1/sessions/2dfb390dd1d84a11925cf44e9f2d5794/content'
 var url = 'http://localhost:%s/documents'
 var exEl = document.querySelector('.exercise-content')
 
 module.exports = {
     dirname: exName
-  , description: readme
+  , description: readme.replace('{{URL}}', DOC_URL)
   , success: success
   , files: files
   , test: test
@@ -31,6 +34,10 @@ function test(done) {
     }
     if (request.options.method !== 'POST') {
       return done(new Error('HINT: the request method should be POST'), false)
+    }
+    var data = JSON.parse(request.data || '{}')
+    if (data.url && data.url !== DOC_URL) {
+      return done(new Error('Ooops, looks like you used the wrong document URL'), false)
     }
     request.options.withCredentials = false
     var r = request(url, request.optiosn)
@@ -54,7 +61,7 @@ function test(done) {
 }
 
 function setup(done) {
-  exEl.innerHTML = require('../click.html') + require('./index.html')
+  exEl.innerHTML = clickHTML + indexHTML
   xhr('/' + exName + '/proxy', function(err, res, body) {
     if (err) {
       throw err

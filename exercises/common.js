@@ -13,6 +13,7 @@ function setupProxy(token, cb) {
   bvbb({
       token: token
     , cwd: path.resolve(process.cwd(), '.tmp')
+    , expose: 'box-view-browser'
   }, cb)
 }
 

@@ -1,8 +1,9 @@
 {
   "dependencies": {
-    "box-view-browser-bundle": "0.0.4",
+    "box-view-browser-bundle": "^0.1.0",
     "concat-stream": "^1.4.6",
-    "curlify": "^0.1.1",
+    "curlify": "^0.1.2",
+    "html-browserify": "0.0.4",
     "mkdirp": "^0.5.0",
     "script-load": "^0.1.0"
   }

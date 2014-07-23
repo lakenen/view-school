@@ -1,5 +1,5 @@
 {
     "» API BASICS: hello, view api!": "00-hello-view-api"
   , "» API BASICS: cURLing": "01-curling"
-  , "» SDKs: node-box-view": "02-node-box-view"
+  , "» NODE-BOX-VIEW: intro": "02-node-box-view"
 }
