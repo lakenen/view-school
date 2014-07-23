@@ -8,6 +8,8 @@ In this lesson, we'll get you setup with a brand new Box View API account.
 
 ## Here's what you need to do
 
-1. Go to https://box.com/developer_signup
-2. ...
-3. Profit!
+1. [Create a Box account](https://box.com/developer_signup) (or [login](http://box.com/developers/services) if you already have one)
+2. Once you're logged in, click "get started" to create a new Box application
+3. Enter a name, select "Box View", and click "Create Application"
+4. Click "Configure Your Application"
+5. The "client_id" field is your View API token! Paste that token into `token.js` in [this project's directory](/open/00-hello-view-api).

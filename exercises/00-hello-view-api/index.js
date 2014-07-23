@@ -3,12 +3,14 @@ var path = require('path')
 var xhr = require('xhr')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
+var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
-var name = path.basename(__dirname)
+var exName = path.basename(__dirname)
 
 module.exports = {
-    dirname: name
+    dirname: exName
   , description: readme
+  , success: success
   , files: files
   , test: test
   , setup: setup
@@ -17,8 +19,12 @@ module.exports = {
 function test(done) {
   // required name is separate so browserify doesnt try to require it in this bundle
   var bv = 'box-view'
+    , token = 'token.js'
+    , client
+
   try {
-    var client = require(bv).createClient()
+    token = require(token)
+    client = require(bv).createClient(token)
     client.documents.list(function (err) {
       if (err) {
         done(new Error('This token does not appear to be valid.'), false)
@@ -33,20 +39,13 @@ function test(done) {
 
 function setup(done) {
   var exEl = document.querySelector('.exercise-content')
-  exEl.innerHTML = require('./index.html')
-  exEl.querySelector('.token-form').addEventListener('submit', function (ev) {
-
-    exEl.classList.add('saving')
-    var token = this.querySelector('input').value
-    xhr('/' + name + '/update-token?token=' + token, function(err, res, body) {
-      if (err) throw err
-      res = JSON.parse(body)
-      getScript('http://localhost:' + res.port + '/box-view-browser-bundle.js', function () {
-        exEl.classList.remove('saving')
-        exEl.classList.add('saved')
-      })
+  exEl.innerHTML = require('../click.html')
+  xhr('/' + exName + '/proxy', function(err, res, body) {
+    if (err) {
+      return done()
+    }
+    getScript('http://localhost:' + JSON.parse(body).port + '/box-view-browser-bundle.js', function () {
+      done()
     })
-    ev.preventDefault()
   })
-  return done()
 }
