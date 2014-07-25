@@ -39,12 +39,5 @@ function test(done) {
 
 function setup(done) {
   exEl.innerHTML = clickHTML + indexHTML
-  xhr('/' + exName + '/proxy', function(err, res, body) {
-    if (err) {
-      return done()
-    }
-    getScript('http://localhost:' + JSON.parse(body).port + '/box-view-browser-bundle.js', function () {
-      done()
-    })
-  })
+  done()
 }

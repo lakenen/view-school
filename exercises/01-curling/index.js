@@ -12,7 +12,7 @@ var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
 var DOC_URL = 'https://view-api.box.com/1/sessions/2dfb390dd1d84a11925cf44e9f2d5794/content'
-var url = 'http://localhost:%s/documents'
+var url  = process.env.BVBB_URL + '/documents'
 var exEl = document.querySelector('.exercise-content')
 
 module.exports = {
@@ -40,7 +40,8 @@ function test(done) {
       return done(new Error('Ooops, looks like you used the wrong document URL'), false)
     }
     request.options.withCredentials = false
-    var r = request(url, request.optiosn)
+
+    var r = request(url, request.options)
     r.pipe(concat(function (data) {
       exEl.querySelector('.response').innerText = JSON.stringify(JSON.parse(data), true, 2)
       try {
@@ -62,12 +63,6 @@ function test(done) {
 
 function setup(done) {
   exEl.innerHTML = clickHTML + indexHTML
-  xhr('/' + exName + '/proxy', function(err, res, body) {
-    if (err) {
-      throw err
-    }
-    url = util.format(url, JSON.parse(body).port)
-    done()
-  })
+  done()
 }
 

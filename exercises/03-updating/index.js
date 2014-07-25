@@ -43,13 +43,16 @@ function test(done) {
       }
     }
   }).createClient()
+
   var called = false
   getLatest(client, function () {
     called = true
   })
+
   if (!called) {
     return done(new Error('HINT: getLatest should call client.documents.list'))
   }
+
   var name = 'magical document of the gods'
   updateLatest(name, function (doc) {
     exEl.querySelector('.response').innerText = JSON.stringify(doc, true, 2)
@@ -63,12 +66,5 @@ function test(done) {
 
 function setup(done) {
   exEl.innerHTML = clickHTML + indexHTML
-  xhr('/' + exName + '/proxy', function(err, res, body) {
-    if (err) {
-      return done()
-    }
-    getScript('http://localhost:' + JSON.parse(body).port + '/box-view-browser-bundle.js', function () {
-      done()
-    })
-  })
+  done()
 }

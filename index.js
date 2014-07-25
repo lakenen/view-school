@@ -5,8 +5,15 @@ var workshopper = require('browser-workshopper')
 var answers = path.resolve(process.cwd(), 'answers')
 mkdirp.sync(answers)
 process.chdir(answers)
-workshopper({
-  exercises: require('./exercises')
-  , exercisesDir: path.resolve(__dirname, 'exercises')
-  , title: 'View School'
-})
+
+require('portfinder').getPort(function (err, port) {
+  if (err) throw err
+  process.env.BVBB_URL = 'http://localhost:' + port + '/bvbb-proxy'
+  workshopper({
+      port: port
+    , exercises: require('./exercises')
+    , exercisesDir: path.resolve(__dirname, 'exercises')
+    , title: 'View School'
+    , mainBundler: require('./exercises/common-bundler')
+  })
+});
