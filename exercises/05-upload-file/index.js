@@ -28,7 +28,7 @@ function requireSolution(name) {
 function test(done) {
   var upload = requireSolution('upload-file')
 
-  upload(file.buffer, function (doc) {
+  upload(file, function (doc) {
     exEl.querySelector('.response').innerText = JSON.stringify(doc, true, 2)
     done(null, true)
   })

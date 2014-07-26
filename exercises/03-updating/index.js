@@ -24,44 +24,69 @@ function requireSolution(name) {
   return require(name + '.js')
 }
 
-function test(done) {
-  var getLatest = requireSolution('get-latest')
-  var updateLatest = requireSolution('update-latest')
+function printResponse(res) {
+  exEl.querySelector('.response').innerText = JSON.stringify(res, true, 2)
+}
 
-  var stub = require('../stub-box-view')({
+function test(done) {
+  var boxViewStub = require('../stub-box-view')
+  var name = 'magical document of the gods'
+    , updateLatest = requireSolution('update-latest')
+    , _done = done
+
+  boxViewStub.restore()
+
+  var theId
+
+  boxViewStub.stub({
     documents: {
-      list: function (opt, cb) {
-        if (opt.limit !== 1) {
-          done()
-          throw new Error('HINT: `limit` the request to 1 document')
+        list: function (opt, cb) {
+          if (typeof opt === 'function') {
+            done('HINT: you need to specify parameters for the list API call')
+          }
+          if (opt.limit !== 1) {
+            done('HINT: `limit` the request to 1 document')
+          }
+          if (opt.created_before) {
+            done('Nice try, but `created_before` is not necessary in this exercise')
+          }
+          return this.__.list(opt, function (err, res) {
+            if (res && res.document_collection) {
+              theId = res.document_collection.entries[0].id
+            }
+            cb(err, res)
+            if (err) {
+              printResponse(err)
+              done('Looks like an API error... check the response for details')
+            }
+          })
         }
-        if (opt.created_before) {
-          done()
-          throw new Error('Nice try, but `created_before` is not necessary in this exercise')
-        }
-        cb(null, { document_collection: { entries: [{}] }})
+      , update: function (id, opt, cb) {
+          if (id !== theId) {
+            done('HINT: the first argument to documents.update should be the id of the document')
+          }
+          if (typeof opt === 'function' || !opt.name) {
+            done('HINT: remember to update the name of the document')
+          }
+          return this.__.update(id, opt, function (err, res) {
+            cb(err, res)
+            if (err) {
+              printResponse(err)
+              done('Looks like an API error... check the response for details')
+            }
+          })
       }
     }
   })
 
-  var called = false
-  getLatest(require('box-view').createClient(), function () {
-    called = true
-  })
-
-  stub.restore();
-
-  if (!called) {
-    return done(new Error('HINT: getLatest should call the callback function'))
-  }
-
-  var name = 'magical document of the gods'
   updateLatest(name, function (doc) {
-    exEl.querySelector('.response').innerText = JSON.stringify(doc, true, 2)
-    if (doc.name === name) {
-      done(null, true)
-    } else {
-      done(new Error('Hmm, it seems like the name is wrong...'))
+    if (doc) {
+      printResponse(doc)
+      if (doc.name === name) {
+        done(null, true)
+      } else {
+        done('Hmm, it seems like the name is wrong...')
+      }
     }
   })
 }

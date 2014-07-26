@@ -1,14 +1,22 @@
 var extend = require('extend')
-module.exports = function (stubs) {
-  var bv = require('box-view');
-  createClient = bv.createClient;
 
+var bv, createClient
+
+module.exports.stub = function (stubs) {
+  bv = require('box-view')
+  createClient = bv.createClient
+  console.log('stubbing')
   bv.createClient = function (token) {
-    return extend(true, createClient(token), {token: token}, stubs);
-  }
-  return {
-    restore: function () {
-      bv.createClient = createClient;
-    }
+    var client = createClient(token)
+      , stubbed = extend(true, {}, client, stubs)
+    stubbed.documents.__ = client.documents
+    stubbed.sessions.__ = client.sessions
+    return stubbed
   }
 }
+module.exports.restore = function () {
+  if (bv) {
+    bv.createClient = createClient
+  }
+}
+

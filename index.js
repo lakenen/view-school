@@ -14,6 +14,6 @@ require('portfinder').getPort(function (err, port) {
     , exercises: require('./exercises')
     , exercisesDir: path.resolve(__dirname, 'exercises')
     , title: 'View School'
-    , mainBundler: require('./exercises/common-bundler')
+    , mainBundler: require('./bundler')
   })
 });
