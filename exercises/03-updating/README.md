@@ -13,6 +13,8 @@ In this exercise, you'll write two node modules
   - export a function that accepts two arguments: a string and a callback function
   - when called, the function should fetch the latest document using `get-latest`, then update the document's name to be the provided string, calling the provided callback function with the updated document
 
+Put your solutions in `get-latest.js` and `update-latest.js` in [this project's directory](/open/03-updating).
+
 ## Resources
 
 * [/documents PUT](http://developers.box.com/view/#put-documents-id) View API documentation

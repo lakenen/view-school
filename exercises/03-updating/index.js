@@ -28,7 +28,7 @@ function test(done) {
   var getLatest = requireSolution('get-latest')
   var updateLatest = requireSolution('update-latest')
 
-  var client = require('../stub-box-view')({
+  var stub = require('../stub-box-view')({
     documents: {
       list: function (opt, cb) {
         if (opt.limit !== 1) {
@@ -42,15 +42,17 @@ function test(done) {
         cb(null, { document_collection: { entries: [{}] }})
       }
     }
-  }).createClient()
+  })
 
   var called = false
-  getLatest(client, function () {
+  getLatest(require('box-view').createClient(), function () {
     called = true
   })
 
+  stub.restore();
+
   if (!called) {
-    return done(new Error('HINT: getLatest should call client.documents.list'))
+    return done(new Error('HINT: getLatest should call the callback function'))
   }
 
   var name = 'magical document of the gods'

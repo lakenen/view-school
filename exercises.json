@@ -1,6 +1,8 @@
 {
     "» API BASICS: hello, view api!": "00-hello-view-api"
   , "» API BASICS: cURLing": "01-curling"
-  , "» NODE-BOX-VIEW: listing uploaded documents": "02-listing"
-  , "» NODE-BOX-VIEW: updating a document": "03-updating"
+  , "» BOX-VIEW: listing uploaded documents": "02-listing"
+  , "» BOX-VIEW: updating a document": "03-updating"
+  , "» BOX-VIEW: uploading documents 1": "04-upload-url"
+  , "» BOX-VIEW: uploading documents 2": "05-upload-file"
 }
