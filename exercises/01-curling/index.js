@@ -30,14 +30,14 @@ function test(done) {
   try {
     var request = require(curl)
     if (request.url !== 'https://view-api.box.com/1/documents') {
-      return done(new Error('HINT: the URL seems to be missing or incorrect'), false)
+      done('HINT: the URL seems to be missing or incorrect')
     }
     if (request.options.method !== 'POST') {
-      return done(new Error('HINT: the request method should be POST'), false)
+      done('HINT: the request method should be POST')
     }
     var data = JSON.parse(request.data || '{}')
     if (data.url && data.url !== DOC_URL) {
-      return done(new Error('Ooops, looks like you used the wrong document URL'), false)
+      done('Ooops, looks like you used the wrong document URL')
     }
     request.options.withCredentials = false
 
@@ -50,14 +50,14 @@ function test(done) {
           // yay
           done(null, true)
         } else {
-          done(new Error(data.message || 'This is not the response I was expecting'))
+          done(data.message || 'This is not the response I was expecting')
         }
       } catch (err) {
-        done(err, false)
+        done(err)
       }
     }))
   } catch (err) {
-    done(err, false)
+    done(err)
   }
 }
 

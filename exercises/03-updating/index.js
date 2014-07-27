@@ -54,7 +54,7 @@ function test(done) {
             }
             cb(err, res)
             if (err) {
-              printResponse(err)
+              printResponse(err.error)
               done('Looks like an API error... check the response for details')
             }
           })
@@ -69,7 +69,7 @@ function test(done) {
           return this.__.update(id, opt, function (err, res) {
             cb(err, res)
             if (err) {
-              printResponse(err)
+              printResponse(err.error)
               done('Looks like an API error... check the response for details')
             }
           })
@@ -85,6 +85,8 @@ function test(done) {
       } else {
         done('Hmm, it seems like the name is wrong...')
       }
+    } else {
+      done('HINT: pass the updated document to the callback function')
     }
   })
 }

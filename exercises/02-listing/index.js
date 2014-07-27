@@ -19,20 +19,50 @@ module.exports = {
   , setup: setup
 }
 
-function test(done) {
-  // required name is separate so browserify doesnt try to require it in this bundle
-  var list = 'list.js'
+function requireSolution(name) {
+  // require solution files in this way so browserify doesnt try to bundle them
+  return require(name + '.js')
+}
 
-  require(list)(function (docs) {
-    exEl.querySelector('.response').innerText = JSON.stringify(docs, true, 2)
-    if (!docs) {
-      return done(new Error('Looks like you did not return the documents'))
+function printResponse(res) {
+  exEl.querySelector('.response').innerText = JSON.stringify(res, true, 2)
+}
+
+function test(done) {
+  var boxViewStub = require('../stub-box-view')
+  // required name is separate so browserify doesnt try to require it in this bundle
+  var list = requireSolution('list')
+
+
+  boxViewStub.restore()
+  boxViewStub.stub({
+    documents: {
+      list: function (opt, cb) {
+        if (typeof opt === 'function') {
+          cb = opt
+          opt = {}
+        }
+        return this.__.list(opt, function (err, res) {
+          cb(err, res)
+          if (err) {
+            printResponse(err.error)
+            done('Looks like an API error... check the response for details')
+          }
+        })
+      }
     }
+  })
+
+  list(function (docs) {
+    if (!docs) {
+      done('HINT: call the callback function with the document list')
+    }
+    printResponse(docs)
     if (docs.document_collection) {
       if (docs.document_collection.entries.length) {
-        return done(null, true)
+        done(null, true)
       }
-      return done(new Error('Oops, I don\'t see any docs (did you upload one yet?)'))
+      done('Oops, I don\'t see any docs (did you upload one yet?)')
     }
   })
 }

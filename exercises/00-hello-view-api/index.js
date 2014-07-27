@@ -27,13 +27,13 @@ function test(done) {
     client = require('box-view').createClient(token)
     client.documents.list(function (err) {
       if (err) {
-        done(new Error('This token does not appear to be valid.'), false)
+        done('This token does not appear to be valid.')
       } else {
         done(null, true)
       }
     })
   } catch (err) {
-    done(new Error('Please submit your token first!'), false)
+    done('Please submit your token first!')
   }
 }
 

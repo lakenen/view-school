@@ -25,6 +25,10 @@ function requireSolution(name) {
   return require(name + '.js')
 }
 
+function printResponse(res) {
+  exEl.querySelector('.response').innerText = JSON.stringify(res, true, 2)
+}
+
 function test(done) {
   var boxViewStub = require('../stub-box-view')
   var upload = requireSolution('upload-url')
@@ -34,15 +38,15 @@ function test(done) {
     documents: {
       uploadURL: function (url, opt, cb) {
         if (url !== DOC_URL) {
-          done('Please use the provided URL!')
+          done('HINT: use the provided URL!')
         }
         if (typeof opt === 'function' || !opt.name) {
-          done('Don\'t forget to specify a name!')
+          done('HINT: don\'t forget to specify a name')
         }
         return this.__.uploadURL(url, opt, function (err, res) {
           cb(err, res)
           if (err) {
-            printResponse(err)
+            printResponse(err.error)
             done('Looks like an API error... check the response for details')
           }
         })
@@ -50,7 +54,7 @@ function test(done) {
     }
   })
   upload(DOC_URL, function (doc) {
-    exEl.querySelector('.response').innerText = JSON.stringify(doc, true, 2)
+    printResponse(doc)
     done(null, true)
   })
 }

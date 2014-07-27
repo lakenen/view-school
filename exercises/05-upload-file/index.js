@@ -30,6 +30,10 @@ function requireSolution(name) {
   return require(name + '.js')
 }
 
+function printResponse(res) {
+  exEl.querySelector('.response').innerText = JSON.stringify(res, true, 2)
+}
+
 function test(done) {
   var boxViewStub = require('../stub-box-view')
   var upload = requireSolution('upload-file')
@@ -47,7 +51,7 @@ function test(done) {
         return this.__.uploadFile(file, opt, function (err, res) {
           cb(err, res)
           if (err) {
-            printResponse(err)
+            printResponse(err.error)
             done('Looks like an API error... check the response for details')
           }
         })
@@ -58,7 +62,7 @@ function test(done) {
     done('HINT: drop a file first (we left a sample in <a target="_blank" href="/open/'+exName+'">the lesson directory</a>)!')
   }
   upload(fileToUpload, function (doc) {
-    exEl.querySelector('.response').innerText = JSON.stringify(doc, true, 2)
+    printResponse(doc)
     done(null, true)
   })
 }

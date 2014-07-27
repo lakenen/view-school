@@ -5,5 +5,5 @@
   , "» BOX-VIEW: updating a document": "03-updating"
   , "» BOX-VIEW: uploading a url": "04-upload-url"
   , "» BOX-VIEW: uploading a file": "05-upload-file"
-  , "» BOX-VIEW: handling errors": "06-errors"
+  , "» BOX-VIEW: create a session": "06-sessions"
 }
