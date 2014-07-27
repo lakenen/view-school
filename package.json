@@ -1,8 +1,8 @@
 {
   "dependencies": {
     "box-view-browser-bundle": "^0.1.0",
-    "brfs": "https://github.com/lakenen/brfs/tarball/readdir",
     "browser-workshopper": "https://github.com/lakenen/browser-workshopper/tarball/wip",
+    "byte-size": "^0.1.0",
     "concat-stream": "^1.4.6",
     "curlify": "^0.1.2",
     "envify": "^2.0.1",

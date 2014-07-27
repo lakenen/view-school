@@ -1,15 +1,20 @@
 var getScript = require('script-load')
 var path = require('path')
 var xhr = require('xhr')
+var dragndrop = require('drag-and-drop-files')
+var size = require('byte-size')
+
+var exName = path.basename(__dirname)
+var exEl = document.querySelector('.exercise-content')
+var fileToUpload
+
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
 var clickHTML = fs.readFileSync(__dirname + '/../click.html', 'utf8')
 var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
-var exName = path.basename(__dirname)
-var exEl = document.querySelector('.exercise-content')
-var file = fs.readFileSync(__dirname + '/file.pdf')
+
 
 module.exports = {
     dirname: exName
@@ -26,9 +31,33 @@ function requireSolution(name) {
 }
 
 function test(done) {
+  var boxViewStub = require('../stub-box-view')
   var upload = requireSolution('upload-file')
 
-  upload(file, function (doc) {
+  boxViewStub.restore()
+  boxViewStub.stub({
+    documents: {
+      uploadFile: function (file, opt, cb) {
+        if (file !== fileToUpload) {
+          done('HINT: the first argument to uploadFile should be the file.')
+        }
+        if (typeof opt === 'function' || !opt.thumbnails) {
+          done('HINT: don\'t forget to specify thumbnails!')
+        }
+        return this.__.uploadFile(file, opt, function (err, res) {
+          cb(err, res)
+          if (err) {
+            printResponse(err)
+            done('Looks like an API error... check the response for details')
+          }
+        })
+      }
+    }
+  })
+  if (!fileToUpload) {
+    done('HINT: drop a file first (we left a sample in <a target="_blank" href="/open/'+exName+'">the lesson directory</a>)!')
+  }
+  upload(fileToUpload, function (doc) {
     exEl.querySelector('.response').innerText = JSON.stringify(doc, true, 2)
     done(null, true)
   })
@@ -36,5 +65,12 @@ function test(done) {
 
 function setup(done) {
   exEl.innerHTML = clickHTML + indexHTML
+
+  var dropTargetEl = document.querySelector('.drop-target')
+  dragndrop(dropTargetEl, function(files) {
+    fileToUpload = files[0]
+    dropTargetEl.innerText = fileToUpload.name + ' (' + size(fileToUpload.size) + ')'
+  })
+
   done()
 }

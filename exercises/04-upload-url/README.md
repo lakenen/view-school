@@ -1,12 +1,12 @@
 # Lesson Five: Uploading a Document by URL
 
-... informative and insightful intro ...
+... informative and insightful intro ... (something about document names too)
 
 ## Your Task
 
 In this exercise, you'll write a node module `upload-url`:
 - export a function that takes two arguments: a string `url` and function `callback`
-- when called, the function should upload the URL to the View API and call the callback function with the result
+- when called, the function should upload the URL to the View API with a name of your choice, then call the callback function with the resulting document object
 
 Put your solution in `upload-url.js` in [this project's directory](/open/04-upload-url).
 
@@ -20,7 +20,8 @@ Example:
 // generate PNG files for IE8 support
 var params = {
   non_svg: true,
-  name: 'my example file'
+  name: 'my example file',
+  thumbnails: '256×256'
 }
 client.documents.uploadURL('http://example.com/file.pdf', params, function (err, doc) {
   // ...

@@ -33,11 +33,9 @@ function test(done) {
   var name = 'magical document of the gods'
     , updateLatest = requireSolution('update-latest')
     , _done = done
+    , theId
 
   boxViewStub.restore()
-
-  var theId
-
   boxViewStub.stub({
     documents: {
         list: function (opt, cb) {

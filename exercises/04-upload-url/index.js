@@ -26,10 +26,30 @@ function requireSolution(name) {
 }
 
 function test(done) {
+  var boxViewStub = require('../stub-box-view')
   var upload = requireSolution('upload-url')
 
-  var url = DOC_URL
-  upload(url, function (doc) {
+  boxViewStub.restore()
+  boxViewStub.stub({
+    documents: {
+      uploadURL: function (url, opt, cb) {
+        if (url !== DOC_URL) {
+          done('Please use the provided URL!')
+        }
+        if (typeof opt === 'function' || !opt.name) {
+          done('Don\'t forget to specify a name!')
+        }
+        return this.__.uploadURL(url, opt, function (err, res) {
+          cb(err, res)
+          if (err) {
+            printResponse(err)
+            done('Looks like an API error... check the response for details')
+          }
+        })
+      }
+    }
+  })
+  upload(DOC_URL, function (doc) {
     exEl.querySelector('.response').innerText = JSON.stringify(doc, true, 2)
     done(null, true)
   })
