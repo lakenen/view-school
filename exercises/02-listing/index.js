@@ -61,8 +61,9 @@ function test(done) {
     if (docs.document_collection) {
       if (docs.document_collection.entries.length) {
         done(null, true)
+      } else {
+        done('Oops, I don\'t see any docs (did you upload one yet?)')
       }
-      done('Oops, I don\'t see any docs (did you upload one yet?)')
     }
   })
 }

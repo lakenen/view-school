@@ -21,6 +21,7 @@ module.exports = {
   , files: files
   , test: test
   , setup: setup
+  , testTimeout: 10000
 }
 
 function requireSolution(name) {
@@ -35,13 +36,19 @@ function printResponse(res) {
 function test(done) {
   var boxViewStub = require('../stub-box-view')
   var view = requireSolution('upload-and-view')
+  var viewerEl = document.querySelector('.viewer')
 
   boxViewStub.restore()
   boxViewStub.stub({
       documents: {
-        uploadURL: function (url, opt, cb) {
+        uploadURL: function (url, opt, cb, retry) {
           if (url !== DOC_URL) {
             done('Please use the provided URL!')
+          }
+          if (typeof opt === 'function') {
+            retry = cb
+            cb = opt
+            opt = {}
           }
           return this.__.uploadURL(url, opt, function (err, res) {
             cb(err, res)
@@ -49,25 +56,37 @@ function test(done) {
               printResponse(err.error)
               done('Looks like an API error... check the log for details')
             }
-          })
+          }, retry)
         }
       }
     , sessions: {
-        create: function (id, opt, cb) {
-          return this.__.create(id, opt, function (err, res) {
-            cb(err, res)
+        create: function (id, opt, cb, retry) {
+          if (typeof opt === 'function') {
+            retry = cb
+            cb = opt
+            opt = {}
+          }
+          if (retry === true) {
+            done('Nice find, but the `retry` arg makes it too easy; let\'s do it the tedious way for this exercise.<br/>HINT: use setTimeout with the "retry-after" header!')
+          }
+          return this.__.create(id, opt, function (err, session, response) {
+            cb(err, session, response)
             if (err) {
               printResponse(err.error)
               done('Looks like an API error... check the log for details')
             }
-          })
+          }, retry)
         }
       }
   })
 
   view(DOC_URL, function (viewURL) {
-    viewerEl.src = viewURL
-    done(null, true)
+    if (viewURL) {
+      viewerEl.src = viewURL
+      done(null, true)
+    } else {
+      done('HINT: pass the view URL as an argument to the callback function')
+    }
   })
 }
 

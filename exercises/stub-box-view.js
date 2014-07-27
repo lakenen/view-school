@@ -5,7 +5,6 @@ var bv, createClient
 module.exports.stub = function (stubs) {
   bv = require('box-view')
   createClient = bv.createClient
-  console.log('stubbing')
   bv.createClient = function (token) {
     var client = createClient(token)
       , stubbed = extend(true, {}, client, stubs)

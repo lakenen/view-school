@@ -48,6 +48,7 @@ function test(done) {
         if (typeof opt === 'function' || !opt.thumbnails) {
           done('HINT: don\'t forget to specify thumbnails!')
         }
+        opt.name = 'view-school:05-upload-file'
         return this.__.uploadFile(file, opt, function (err, res) {
           cb(err, res)
           if (err) {
