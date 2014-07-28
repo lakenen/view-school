@@ -4,36 +4,36 @@
 
 ## Your Task
 
-In this exercise, you'll write a node module `upload-file`:
+In this exercise, you'll write a node module `download-thumbnail`:
 - export a function that takes a callback function as an argument
-- when called, the function should upload the file to the View API with a specified thumbnail size, then call the callback function with the result
+- when called, the function should make a request to the View API for a thumbnail for a document of your choice (hint: go back to [02-listing]('/02-listing') to get a document id), with a size of your choice, then call the callback function with the response object
 
 Put your solution in `upload-file.js` in [this project's directory](/open/05-upload-file).
 
-## uploadFile
+## getThumbnail
 
-Aside from specifying a file rather than a URL, the `uploadFile` method behaves the same as `uploadURL`. You can specify the `file` argument in several ways.
+The `getThumbnail` method allows you to download the PNG representation of the the first page of a document. You must specify the document id and the desired size of the thumbnail.
+
+*Thumbnails will always preserve the aspect ratio of the original document but will best fit the dimensions requested. For example, if a 16×16 thumbnail is requested for a document with a 2:1 aspect ratio, a 16×8 thumbnail will be returned.*
 
 Example:
 ```js
-function response(err, doc) {
-  // ...
+var file = fs.createWriteStream('thumb.png')
+var params = {
+  width: 240,
+  height: 320
 }
 
-// by filename
-var filename = process.cwd() + '/example/file.pdf'
-client.documents.uploadFile(filename, response)
+// with a callback function
+client.documents.getThumbnail(docId, params, function (err, res) {
+  // do something with the response stream `res`
+})
 
-// by file stream
-var file = fs.createReadStream(filename)
-client.documents.uploadFile(file, response)
-
-// by buffer
-var fileBuffer = fs.readFileSync(filename)
-client.documents.uploadFile(fileBuffer, response)
+// or simply pipe the response to the file
+client.documents.getThumbnail(docId, params).pipe(file)
 ```
 
 ## Resources
 
-* [/documents POST](https://developers.box.com/view/#post-documents) View API documentation
-* [documents.uploadFile](https://www.npmjs.org/package/box-view#uploadfile) `box-view` documentation
+* [/documents/{id}/thumbnail GET](https://developers.box.com/view/#get-documents-id-thumbnail) View API documentation
+* [documents.getThumbnail](https://www.npmjs.org/package/box-view#getthumbnail) `box-view` documentation

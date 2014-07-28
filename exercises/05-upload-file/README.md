@@ -1,12 +1,12 @@
 # Lesson Six: Uploading a Document
 
-... informative and insightful intro ... (something about thumbnails too)
+... informative and insightful intro ...
 
 ## Your Task
 
 In this exercise, you'll write a node module `upload-file`:
 - export a function that takes two arguments: a Buffer `file` and function `callback`
-- when called, the function should upload the file to the View API with a specified thumbnail size, then call the callback function with the result
+- when called, the function should upload the file to the View API, then call the callback function with the result
 
 Put your solution in `upload-file.js` in [this project's directory](/open/05-upload-file).
 

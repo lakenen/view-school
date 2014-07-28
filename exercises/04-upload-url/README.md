@@ -21,7 +21,7 @@ Example:
 var params = {
   non_svg: true,
   name: 'my example file',
-  thumbnails: '256×256'
+  thumbnails: '256×256' // pre-generate thumbnails
 }
 client.documents.uploadURL('http://example.com/file.pdf', params, function (err, doc) {
   // ...
