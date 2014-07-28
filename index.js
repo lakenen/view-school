@@ -6,6 +6,9 @@ var answers = path.resolve(process.cwd(), 'answers')
 mkdirp.sync(answers)
 process.chdir(answers)
 
+var browserifyBuiltins = require('browser-workshopper/node_modules/browserify/lib/builtins')
+browserifyBuiltins.http = require.resolve('http-browserify')
+
 require('portfinder').getPort(function (err, port) {
   if (err) throw err
   process.env.BVBB_URL = 'http://localhost:' + port + '/proxy'
@@ -14,6 +17,9 @@ require('portfinder').getPort(function (err, port) {
     , exercises: require('./exercises')
     , exercisesDir: path.resolve(__dirname, 'exercises')
     , title: 'View School'
+    , bundlerOpts: {
+        builtins: browserifyBuiltins
+      }
     , mainBundler: require('./bundler')
   })
 });
