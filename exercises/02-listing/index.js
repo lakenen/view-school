@@ -28,9 +28,6 @@ function printResponse(res) {
 
 function test(done) {
   var boxViewMock = require('../mock-box-view')
-  // required name is separate so browserify doesnt try to require it in this bundle
-  var list = requireSolution('list')
-
 
   boxViewMock.restore()
   boxViewMock.mock({
@@ -51,6 +48,7 @@ function test(done) {
     }
   })
 
+  var list = requireSolution('list')
   list(function (docs) {
     if (!docs) {
       done('HINT: call the callback function with the document list')

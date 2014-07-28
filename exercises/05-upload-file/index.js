@@ -34,7 +34,6 @@ function printResponse(res) {
 
 function test(done) {
   var boxViewMock = require('../mock-box-view')
-  var upload = requireSolution('upload-file')
 
   boxViewMock.restore()
   boxViewMock.mock({
@@ -60,6 +59,8 @@ function test(done) {
   if (!fileToUpload) {
     done('HINT: drop a file first (we left a sample in <a target="_blank" href="/open/'+exName+'">the lesson directory</a>)!')
   }
+
+  var upload = requireSolution('upload-file')
   upload(fileToUpload, function (doc) {
     printResponse(doc)
     done(null, true)

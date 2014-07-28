@@ -29,7 +29,6 @@ function printResponse(res) {
 
 function test(done) {
   var boxViewMock = require('../mock-box-view')
-  var upload = requireSolution('upload-url')
 
   boxViewMock.restore()
   boxViewMock.mock({
@@ -51,6 +50,8 @@ function test(done) {
       }
     }
   })
+
+  var upload = requireSolution('upload-url')
   upload(DOC_URL, function (doc) {
     printResponse(doc)
     done(null, true)

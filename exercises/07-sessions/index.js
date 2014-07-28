@@ -19,7 +19,7 @@ module.exports = {
   , files: files
   , test: test
   , setup: setup
-  , testTimeout: 10000
+  , testTimeout: false
 }
 
 function requireSolution(name) {
@@ -33,7 +33,6 @@ function printResponse(res) {
 
 function test(done) {
   var boxViewMock = require('../mock-box-view')
-  var view = requireSolution('upload-and-view')
   var viewerEl = document.querySelector('.viewer')
 
   boxViewMock.restore()
@@ -59,13 +58,11 @@ function test(done) {
       }
     , sessions: {
         create: function (id, opt, cb, retry) {
+          console.log(id, opt, cb, retry)
           if (typeof opt === 'function') {
             retry = cb
             cb = opt
             opt = {}
-          }
-          if (retry === true) {
-            done('Nice find, but the `retry` arg makes it too easy; let\'s do it the tedious way for this exercise.<br/>HINT: use setTimeout with the "retry-after" header!')
           }
           return this.__.create(id, opt, function (err, session, response) {
             cb(err, session, response)
@@ -78,6 +75,7 @@ function test(done) {
       }
   })
 
+  var view = requireSolution('upload-and-view')
   view(DOC_URL, function (viewURL) {
     if (viewURL) {
       viewerEl.src = viewURL

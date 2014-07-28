@@ -17,6 +17,7 @@ module.exports = {
   , files: files
   , test: test
   , setup: setup
+  , testTimeout: false
 }
 
 function requireSolution(name) {
@@ -30,12 +31,15 @@ function printResponse(res) {
 
 function test(done) {
   var boxViewMock = require('../mock-box-view')
-  var getThumbnail = requireSolution('download-thumbnail')
 
   boxViewMock.restore()
   boxViewMock.mock({
     documents: {
       getThumbnail: function (id, opt, cb, retry) {
+
+        if (retry === true) {
+          done('Nice find, but the `retry` arg makes it too easy; let\'s learn a bit about 202 responses.<br/><br/>HINT: use setTimeout with the "retry-after" header!')
+        }
 
         return this.__.getThumbnail(id, opt, function (err, res) {
           cb(err, res)
@@ -47,8 +51,9 @@ function test(done) {
       }
     }
   })
+
+  var getThumbnail = requireSolution('download-thumbnail')
   getThumbnail(function (res) {
-    console.log(res.buffer)
 
     var result = [];
     res.on('data', function (d) {

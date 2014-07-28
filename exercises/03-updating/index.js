@@ -29,7 +29,6 @@ function printResponse(res) {
 function test(done) {
   var boxViewMock = require('../mock-box-view')
   var name = 'magical document of the gods'
-    , updateLatest = requireSolution('update-latest')
     , _done = done
     , theId
 
@@ -75,6 +74,7 @@ function test(done) {
     }
   })
 
+  var updateLatest = requireSolution('update-latest')
   updateLatest(name, function (doc) {
     if (doc) {
       printResponse(doc)
