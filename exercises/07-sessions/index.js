@@ -7,7 +7,7 @@ var DOC_URL = 'https://view-api.box.com/1/sessions/2dfb390dd1d84a11925cf44e9f2d5
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
-var clickHTML = fs.readFileSync(__dirname + '/../click.html', 'utf8')
+var commonHTML = fs.readFileSync(__dirname + '/../common.html', 'utf8')
 var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 
@@ -87,6 +87,6 @@ function test(done) {
 }
 
 function setup(done) {
-  exEl.innerHTML = clickHTML + indexHTML
+  exEl.innerHTML = commonHTML + indexHTML
   done()
 }
