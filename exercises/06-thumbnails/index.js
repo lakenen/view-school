@@ -1,12 +1,14 @@
 var path = require('path')
+var exName = path.basename(__dirname)
+var exEl = document.querySelector('.exercise-content')
+
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
 var clickHTML = fs.readFileSync(__dirname + '/../click.html', 'utf8')
 var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
-var exName = path.basename(__dirname)
-var exEl = document.querySelector('.exercise-content')
+
 
 module.exports = {
     dirname: exName
@@ -28,19 +30,14 @@ function printResponse(res) {
 
 function test(done) {
   var boxViewMock = require('../mock-box-view')
-  // required name is separate so browserify doesnt try to require it in this bundle
-  var list = requireSolution('list')
-
+  var getThumbnail = requireSolution('download-thumbnail')
 
   boxViewMock.restore()
   boxViewMock.mock({
     documents: {
-      list: function (opt, cb) {
-        if (typeof opt === 'function') {
-          cb = opt
-          opt = {}
-        }
-        return this.__.list(opt, function (err, res) {
+      getThumbnail: function (id, opt, cb, retry) {
+
+        return this.__.getThumbnail(id, opt, function (err, res) {
           cb(err, res)
           if (err) {
             printResponse(err.error)
@@ -50,23 +47,36 @@ function test(done) {
       }
     }
   })
+  getThumbnail(function (res) {
+    console.log(res.buffer)
 
-  list(function (docs) {
-    if (!docs) {
-      done('HINT: call the callback function with the document list')
-    }
-    printResponse(docs)
-    if (docs.document_collection) {
-      if (docs.document_collection.entries.length) {
-        done(null, true)
-      } else {
-        done('Oops, I don\'t see any docs (did you upload one yet?)')
-      }
-    }
+    var result = [];
+    res.on('data', function (d) {
+      result.push(d)
+    })
+    res.on('end', function (e) {
+      var data = concat.apply(null, result);
+      var blob = new window.Blob([ data ])
+
+      exEl.querySelector('img').src = URL.createObjectURL(blob)
+      done(null, true)
+    })
   })
 }
 
 function setup(done) {
   exEl.innerHTML = clickHTML + indexHTML
+
   done()
+}
+
+function concatBuffer(buffer1, buffer2) {
+  var tmp = new Uint8Array(buffer1.byteLength + buffer2.byteLength);
+  tmp.set(new Uint8Array(buffer1), 0);
+  tmp.set(new Uint8Array(buffer2), buffer1.byteLength);
+  return tmp.buffer;
+}
+
+function concat() {
+  return [].reduce.call(arguments, concatBuffer);
 }

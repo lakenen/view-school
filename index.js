@@ -8,7 +8,7 @@ process.chdir(answers)
 
 require('portfinder').getPort(function (err, port) {
   if (err) throw err
-  process.env.BVBB_URL = 'http://localhost:' + port + '/bvbb-proxy'
+  process.env.BVBB_URL = 'http://localhost:' + port + '/proxy'
   workshopper({
       port: port
     , exercises: require('./exercises')

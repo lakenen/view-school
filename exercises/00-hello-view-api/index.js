@@ -1,6 +1,4 @@
-var getScript = require('script-load')
 var path = require('path')
-var xhr = require('xhr')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')

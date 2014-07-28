@@ -1,6 +1,4 @@
-var getScript = require('script-load')
 var path = require('path')
-var xhr = require('xhr')
 
 var exName = path.basename(__dirname)
 var exEl = document.querySelector('.exercise-content')
@@ -34,12 +32,12 @@ function printResponse(res) {
 }
 
 function test(done) {
-  var boxViewStub = require('../stub-box-view')
+  var boxViewMock = require('../mock-box-view')
   var view = requireSolution('upload-and-view')
   var viewerEl = document.querySelector('.viewer')
 
-  boxViewStub.restore()
-  boxViewStub.stub({
+  boxViewMock.restore()
+  var mock = boxViewMock.mock({
       documents: {
         uploadURL: function (url, opt, cb, retry) {
           if (url !== DOC_URL) {

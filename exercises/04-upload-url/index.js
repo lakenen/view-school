@@ -1,6 +1,4 @@
-var getScript = require('script-load')
 var path = require('path')
-var xhr = require('xhr')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
@@ -30,11 +28,11 @@ function printResponse(res) {
 }
 
 function test(done) {
-  var boxViewStub = require('../stub-box-view')
+  var boxViewMock = require('../mock-box-view')
   var upload = requireSolution('upload-url')
 
-  boxViewStub.restore()
-  boxViewStub.stub({
+  boxViewMock.restore()
+  boxViewMock.mock({
     documents: {
       uploadURL: function (url, opt, cb) {
         if (url !== DOC_URL) {

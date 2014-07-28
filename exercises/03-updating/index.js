@@ -1,6 +1,4 @@
-var getScript = require('script-load')
 var path = require('path')
-var xhr = require('xhr')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
@@ -29,14 +27,14 @@ function printResponse(res) {
 }
 
 function test(done) {
-  var boxViewStub = require('../stub-box-view')
+  var boxViewMock = require('../mock-box-view')
   var name = 'magical document of the gods'
     , updateLatest = requireSolution('update-latest')
     , _done = done
     , theId
 
-  boxViewStub.restore()
-  boxViewStub.stub({
+  boxViewMock.restore()
+  boxViewMock.mock({
     documents: {
         list: function (opt, cb) {
           if (typeof opt === 'function') {

@@ -1,6 +1,4 @@
-var getScript = require('script-load')
 var path = require('path')
-var xhr = require('xhr')
 var dragndrop = require('drag-and-drop-files')
 var size = require('byte-size')
 
@@ -35,11 +33,11 @@ function printResponse(res) {
 }
 
 function test(done) {
-  var boxViewStub = require('../stub-box-view')
+  var boxViewMock = require('../mock-box-view')
   var upload = requireSolution('upload-file')
 
-  boxViewStub.restore()
-  boxViewStub.stub({
+  boxViewMock.restore()
+  boxViewMock.mock({
     documents: {
       uploadFile: function (file, opt, cb) {
         if (file !== fileToUpload) {
