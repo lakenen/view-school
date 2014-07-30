@@ -1,4 +1,5 @@
 var path = require('path')
+var printResponse = require('../print-response')
 var exName = path.basename(__dirname)
 var exEl = document.querySelector('.exercise-content')
 
@@ -25,10 +26,6 @@ function requireSolution(name) {
   return require(name + '.js')
 }
 
-function printResponse(res) {
-  exEl.querySelector('.response').innerText = JSON.stringify(res, true, 2)
-}
-
 function test(done) {
   var boxViewMock = require('../mock-box-view')
 
@@ -41,13 +38,17 @@ function test(done) {
           done('Nice find, but the `retry` arg makes it too easy; let\'s learn a bit about 202 responses.<br/><br/>HINT: use setTimeout with the "retry-after" header!')
         }
 
-        return this.__.getThumbnail(id, opt, function (err, res) {
+        var r = this.__.getThumbnail(id, opt, function (err, res) {
           cb(err, res)
           if (err) {
             printResponse(err.error)
             done('Looks like an API error... check the response for details')
           }
         })
+        r.on('response', function (res) {
+          res.pipe(printResponse({ ignoreBody: true }))
+        })
+        return r
       }
     }
   })

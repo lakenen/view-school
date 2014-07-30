@@ -1,4 +1,5 @@
 var path = require('path')
+var printResponse = require('../print-response')
 var dragndrop = require('drag-and-drop-files')
 var size = require('byte-size')
 
@@ -28,10 +29,6 @@ function requireSolution(name) {
   return require(name + '.js')
 }
 
-function printResponse(res) {
-  exEl.querySelector('.response').innerText = JSON.stringify(res, true, 2)
-}
-
 function test(done) {
   var boxViewMock = require('../mock-box-view')
 
@@ -47,13 +44,16 @@ function test(done) {
           opt = {}
         }
         opt.name = 'view-school:05-upload-file'
-        return this.__.uploadFile(file, opt, function (err, res) {
+        var r = this.__.uploadFile(file, opt, function (err, res) {
           cb(err, res)
           if (err) {
-            printResponse(err.error)
             done('Looks like an API error... check the response for details')
           }
         })
+        r.on('response', function (res) {
+          res.pipe(printResponse())
+        })
+        return r
       }
     }
   })
@@ -63,8 +63,11 @@ function test(done) {
 
   var upload = requireSolution('upload-file')
   upload(fileToUpload, function (doc) {
-    printResponse(doc)
-    done(null, true)
+    if (doc.id) {
+      done(null, true)
+    } else {
+      done('This does not look like a valid document response')
+    }
   })
 }
 

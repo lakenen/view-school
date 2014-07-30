@@ -8,6 +8,8 @@ var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 var exEl = document.querySelector('.exercise-content')
 
+var printResponse = require('../print-response')
+
 module.exports = {
     dirname: exName
   , description: readme
@@ -22,10 +24,6 @@ function requireSolution(name) {
   return require(name + '.js')
 }
 
-function printResponse(res) {
-  exEl.querySelector('.response').innerText = JSON.stringify(res, true, 2)
-}
-
 function test(done) {
   var boxViewMock = require('../mock-box-view')
 
@@ -37,13 +35,16 @@ function test(done) {
           cb = opt
           opt = {}
         }
-        return this.__.list(opt, function (err, res) {
-          cb(err, res)
+        var r = this.__.list(opt, function (err, body, response) {
+          cb(err, body)
           if (err) {
-            printResponse(err.error)
             done('Looks like an API error... check the response for details')
           }
         })
+        r.on('response', function (res) {
+          res.pipe(printResponse())
+        })
+        return r
       }
     }
   })
@@ -53,7 +54,6 @@ function test(done) {
     if (!docs) {
       done('HINT: call the callback function with the document list')
     }
-    printResponse(docs)
     if (docs.document_collection) {
       if (docs.document_collection.entries.length) {
         done(null, true)

@@ -1,4 +1,5 @@
 var path = require('path')
+var printResponse = require('../print-response')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
@@ -22,10 +23,6 @@ function requireSolution(name) {
   return require(name + '.js')
 }
 
-function printResponse(res) {
-  exEl.querySelector('.response').innerText = JSON.stringify(res, true, 2)
-}
-
 function test(done) {
   var boxViewMock = require('../mock-box-view')
   var name = 'magical document of the gods'
@@ -45,16 +42,19 @@ function test(done) {
           if (opt.created_before) {
             done('Nice try, but `created_before` is not necessary in this exercise')
           }
-          return this.__.list(opt, function (err, res) {
+          var r = this.__.list(opt, function (err, res) {
             if (res && res.document_collection) {
               theId = res.document_collection.entries[0].id
             }
             cb(err, res)
             if (err) {
-              printResponse(err.error)
               done('Looks like an API error... check the response for details')
             }
           })
+          r.on('response', function (res) {
+            res.pipe(printResponse())
+          })
+          return r
         }
       , update: function (id, opt, cb) {
           if (id !== theId) {
@@ -63,13 +63,16 @@ function test(done) {
           if (typeof opt === 'function' || !opt.name) {
             done('HINT: remember to update the name of the document')
           }
-          return this.__.update(id, opt, function (err, res) {
+          var r = this.__.update(id, opt, function (err, res) {
             cb(err, res)
             if (err) {
-              printResponse(err.error)
               done('Looks like an API error... check the response for details')
             }
           })
+          r.on('response', function (res) {
+            res.pipe(printResponse())
+          })
+          return r
       }
     }
   })
@@ -77,7 +80,6 @@ function test(done) {
   var updateLatest = requireSolution('update-latest')
   updateLatest(name, function (doc) {
     if (doc) {
-      printResponse(doc)
       if (doc.name === name) {
         done(null, true)
       } else {

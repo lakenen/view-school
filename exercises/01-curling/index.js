@@ -1,5 +1,6 @@
 var path = require('path')
 var concat = require('concat-stream')
+var printResponse = require('../print-response')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
@@ -40,7 +41,6 @@ function test(done) {
 
     var r = request(url, request.options)
     r.pipe(concat(function (data) {
-      exEl.querySelector('.response').innerText = JSON.stringify(JSON.parse(data), true, 2)
       try {
         data = JSON.parse(data)
         if (data.type === 'document') {
@@ -53,6 +53,9 @@ function test(done) {
         done(err)
       }
     }))
+    r.on('response', function (res) {
+      res.pipe(printResponse())
+    })
   } catch (err) {
     done(err)
   }

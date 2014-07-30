@@ -1,4 +1,5 @@
 var path = require('path')
+var printResponse = require('../print-response')
 
 var exName = path.basename(__dirname)
 var exEl = document.querySelector('.exercise-content')
@@ -27,10 +28,6 @@ function requireSolution(name) {
   return require(name + '.js')
 }
 
-function printResponse(res) {
-  console.log(JSON.stringify(res, true, 2))
-}
-
 function test(done) {
   var boxViewMock = require('../mock-box-view')
   var viewerEl = document.querySelector('.viewer')
@@ -47,30 +44,46 @@ function test(done) {
             cb = opt
             opt = {}
           }
-          return this.__.uploadURL(url, opt, function (err, res) {
-            cb(err, res)
+          var r = this.__.uploadURL(url, opt, function (err, body, response) {
+            cb(err, body, response)
             if (err) {
-              printResponse(err.error)
-              done('Looks like an API error... check the log for details')
+              done('Looks like an API error... check the response log for details')
             }
           }, retry)
+          r.on('response', function (res) {
+            res.pipe(printResponse())
+          })
+          return r
         }
       }
     , sessions: {
         create: function (id, opt, cb, retry) {
-          console.log(id, opt, cb, retry)
           if (typeof opt === 'function') {
             retry = cb
             cb = opt
             opt = {}
           }
-          return this.__.create(id, opt, function (err, session, response) {
-            cb(err, session, response)
-            if (err) {
-              printResponse(err.error)
-              done('Looks like an API error... check the log for details')
-            }
-          }, retry)
+          if (!retry) {
+            done('HINT: use the `retry` argument on sessions.create()')
+          }
+          var __ = this.__
+          function makeRequest() {
+            var r = __.create(id, opt, function (err, session, response) {
+              if (response && response.statusCode === 202 && response.headers['retry-after']) {
+                setTimeout(makeRequest, parseInt(response.headers['retry-after'], 10) * 1000)
+              } else {
+                cb(err, session, response)
+              }
+              if (err) {
+                done('Looks like an API error... check the response log for details')
+              }
+            })
+            r.on('response', function (res) {
+              res.pipe(printResponse())
+            })
+            return r
+          }
+          return makeRequest()
         }
       }
   })

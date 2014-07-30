@@ -1,4 +1,5 @@
 var path = require('path')
+var printResponse = require('../print-response')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
@@ -23,10 +24,6 @@ function requireSolution(name) {
   return require(name + '.js')
 }
 
-function printResponse(res) {
-  exEl.querySelector('.response').innerText = JSON.stringify(res, true, 2)
-}
-
 function test(done) {
   var boxViewMock = require('../mock-box-view')
 
@@ -40,21 +37,27 @@ function test(done) {
         if (typeof opt === 'function' || !opt.name) {
           done('HINT: don\'t forget to specify a name')
         }
-        return this.__.uploadURL(url, opt, function (err, res) {
+        var r = this.__.uploadURL(url, opt, function (err, res) {
           cb(err, res)
           if (err) {
-            printResponse(err.error)
             done('Looks like an API error... check the response for details')
           }
         })
+        r.on('response', function (res) {
+          res.pipe(printResponse())
+        })
+        return r
       }
     }
   })
 
   var upload = requireSolution('upload-url')
   upload(DOC_URL, function (doc) {
-    printResponse(doc)
-    done(null, true)
+    if (doc.id) {
+      done(null, true)
+    } else {
+      done('This does not look like a valid document response')
+    }
   })
 }
 

@@ -11,7 +11,7 @@ browserifyBuiltins.http = require.resolve('http-browserify')
 
 require('portfinder').getPort(function (err, port) {
   if (err) throw err
-  process.env.BVBB_URL = 'http://localhost:' + port + '/proxy'
+  process.env.BVBB_URL = 'http://localhost:' + port + '/1'
   workshopper({
       port: port
     , exercises: require('./exercises')
