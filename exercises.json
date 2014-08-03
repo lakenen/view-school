@@ -7,4 +7,5 @@
   , "» BOX-VIEW: uploading a file": "05-upload-file"
   , "» BOX-VIEW: thumbnails": "06-thumbnails"
   , "» BOX-VIEW: create a session": "07-sessions"
+  , "» VIEWER.JS: view a document": "08-viewer-js"
 }
