@@ -33,13 +33,13 @@ function test(done) {
   boxViewMock.mock({
     documents: {
         list: function (opt, cb) {
-          if (typeof opt === 'function') {
-            done('HINT: you need to specify parameters for the list API call')
+          if (typeof opt === 'function' || !opt.params) {
+            done('HINT: you\'ll need to specify some `params` with the list request')
           }
-          if (opt.limit !== 1) {
+          if (opt.params.limit !== 1) {
             done('HINT: `limit` the request to 1 document')
           }
-          if (opt.created_before) {
+          if (opt.params.created_before) {
             done('Nice try, but `created_before` is not necessary in this exercise')
           }
           var r = this.__.list(opt, function (err, res) {
@@ -56,14 +56,21 @@ function test(done) {
           })
           return r
         }
-      , update: function (id, opt, cb) {
+      , update: function (id, data, opt, cb) {
           if (id !== theId) {
             done('HINT: the first argument to documents.update should be the id of the document')
           }
-          if (typeof opt === 'function' || !opt.name) {
+          if (typeof opt === 'function') {
+            cb = opt
+            opt = {}
+          }
+          if (typeof data === 'function' || !data) {
+            done('HINT: you\'ll need to specify some `data` with the update request')
+          }
+          if (!data.name) {
             done('HINT: remember to update the name of the document')
           }
-          var r = this.__.update(id, opt, function (err, res) {
+          var r = this.__.update(id, data, opt, function (err, res) {
             cb(err, res)
             if (err) {
               done('Looks like an API error... check the response for details')

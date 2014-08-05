@@ -5,8 +5,9 @@
 ## Your Task
 
 In this exercise, you'll write a node module `upload-and-view`:
-- export a function that takes two arguments: a string `url` and function `callback`
-- when called, the function should upload the URL to the View API, create a viewing session for the resulting document, then call the callback function with the session's `view` URL.
+- Export a function that takes two arguments: a string `url` and function `callback`.
+- When called, the function should upload the URL to the View API, create a viewing session for the resulting document, then call the callback function with the session's `view` URL.
+- The session should be created with a duration of 30 minutes and text selection disabled.
 
 Put your solution in `upload-and-view.js` in [this project's directory](/open/06-sessions).
 

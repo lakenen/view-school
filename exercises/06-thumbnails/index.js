@@ -32,13 +32,21 @@ function test(done) {
   boxViewMock.restore()
   boxViewMock.mock({
     documents: {
-      getThumbnail: function (id, opt, cb, retry) {
+      getThumbnail: function (id, width, height, opt, cb) {
 
-        if (retry === true) {
-          done('Nice find, but the `retry` arg makes it too easy; let\'s learn a bit about 202 responses.<br/><br/>HINT: use setTimeout with the "retry-after" header!')
+        if (typeof width !== 'number' || typeof height !== 'number') {
+          done('HINT: you should specify both a width and a height')
         }
 
-        var r = this.__.getThumbnail(id, opt, function (err, res) {
+        if (!opt) {
+          opt = {}
+        }
+
+        if (opt.retry === true) {
+          done('Nice find, but the `retry` option makes it too easy; let\'s learn a bit about 202 responses.<br/><br/>HINT: use setTimeout with the "retry-after" header!')
+        }
+
+        var r = this.__.getThumbnail(id, width, height, opt, function (err, res) {
           cb(err, res)
           if (err) {
             printResponse(err.error)

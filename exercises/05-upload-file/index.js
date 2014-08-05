@@ -41,9 +41,9 @@ function test(done) {
         }
         if (typeof opt === 'function') {
           cb = opt
-          opt = {}
+          opt = { params: {} }
         }
-        opt.name = 'view-school:05-upload-file'
+        opt.params.name = 'view-school:05-upload-file'
         var r = this.__.uploadFile(file, opt, function (err, res) {
           cb(err, res)
           if (err) {

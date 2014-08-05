@@ -35,21 +35,21 @@ function test(done) {
   boxViewMock.restore()
   var mock = boxViewMock.mock({
       documents: {
-        uploadURL: function (url, opt, cb, retry) {
+        uploadURL: function (url, opt, cb) {
           if (url !== DOC_URL) {
             done('Please use the provided URL!')
           }
           if (typeof opt === 'function') {
             retry = cb
             cb = opt
-            opt = {}
+            opt = { params: {} }
           }
           var r = this.__.uploadURL(url, opt, function (err, body, response) {
             cb(err, body, response)
             if (err) {
               done('Looks like an API error... check the response log for details')
             }
-          }, retry)
+          })
           r.on('response', function (res) {
             res.pipe(printResponse())
           })
@@ -57,13 +57,24 @@ function test(done) {
         }
       }
     , sessions: {
-        create: function (id, opt, cb, retry) {
+        create: function (id, opt, cb) {
           if (typeof opt === 'function') {
             retry = cb
             cb = opt
-            opt = {}
+            opt = { params: {} }
           }
-          if (!retry) {
+
+          if (!opt.params) {
+            done('HINT: you\'ll need to specify some `params` with the session request')
+          }
+
+          if (opt.params.is_text_selectable !== false) {
+            done('HINT: remember to disable text selection')
+          }
+          if (opt.params.duration !== 30) {
+            done('HINT: remember to set the correct duration')
+          }
+          if (!opt.retry) {
             done('HINT: use the `retry` argument on sessions.create()')
           }
           var __ = this.__

@@ -34,7 +34,11 @@ function test(done) {
         if (url !== DOC_URL) {
           done('HINT: use the provided URL!')
         }
-        if (typeof opt === 'function' || !opt.name) {
+        if (typeof opt === 'function' || !opt.params) {
+          done('HINT: you\'ll need to specify some `params` with the upload request')
+        }
+
+        if (!opt.params.name) {
           done('HINT: don\'t forget to specify a name')
         }
         var r = this.__.uploadURL(url, opt, function (err, res) {
