@@ -6,7 +6,6 @@ var exEl = document.querySelector('.exercise-content')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
-var commonHTML = fs.readFileSync(__dirname + '/../common.html', 'utf8')
 var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 
@@ -72,14 +71,14 @@ function test(done) {
       var data = concat.apply(null, result);
       var blob = new window.Blob([ data ])
 
-      exEl.querySelector('img').src = URL.createObjectURL(blob)
+      exEl.querySelector('.thumbnail-img').src = URL.createObjectURL(blob)
       done(null, true)
     })
   })
 }
 
 function setup(done) {
-  exEl.innerHTML = commonHTML + indexHTML
+  exEl.innerHTML = indexHTML
 
   done()
 }

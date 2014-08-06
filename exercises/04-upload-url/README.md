@@ -23,7 +23,8 @@ var params = {
   name: 'my example file',
   thumbnails: '256×256' // pre-generate thumbnails
 }
-client.documents.uploadURL('http://example.com/file.pdf', params, function (err, doc) {
+var url = 'http://example.com/file.pdf'
+client.documents.uploadURL(url, params, function (err, doc) {
   // ...
 })
 ```

@@ -11,3 +11,21 @@ body {
   color: #fff;
   background-color: #527cff;
 }
+
+.drop-target {
+  text-align: center;
+  color: white;
+  width: 400px;
+  line-height: 400px;
+  border: 4px dashed #fff;
+  margin: 1em auto;
+}
+
+.viewer-container {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  border: 0;
+  width: 80%;
+  height: 80%;
+}

@@ -2,7 +2,6 @@ var path = require('path')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
-var commonHTML = fs.readFileSync(__dirname + '/../common.html', 'utf8')
 var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
@@ -46,6 +45,6 @@ function test(done) {
 
 function setup(done) {
   var exEl = document.querySelector('.exercise-content')
-  exEl.innerHTML = commonHTML + indexHTML
+  exEl.innerHTML = indexHTML
   done()
 }
