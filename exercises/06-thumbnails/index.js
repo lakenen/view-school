@@ -1,7 +1,7 @@
 var path = require('path')
 var printResponse = require('../print-response')
 var exName = path.basename(__dirname)
-var exEl = document.querySelector('.exercise-content')
+var exEl = document.querySelector('.display')
 
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')

@@ -4,7 +4,7 @@ var dragndrop = require('drag-and-drop-files')
 var size = require('byte-size')
 
 var exName = path.basename(__dirname)
-var exEl = document.querySelector('.exercise-content')
+var exEl = document.querySelector('.display')
 var fileToUpload
 
 var fs = require('fs')

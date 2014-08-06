@@ -44,7 +44,7 @@ function test(done) {
 }
 
 function setup(done) {
-  var exEl = document.querySelector('.exercise-content')
+  var exEl = document.querySelector('.display')
   exEl.innerHTML = indexHTML
   done()
 }

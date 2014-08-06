@@ -2,7 +2,7 @@ var path = require('path')
 var printResponse = require('../print-response')
 
 var exName = path.basename(__dirname)
-var exEl = document.querySelector('.exercise-content')
+var exEl = document.querySelector('.display')
 var DOC_URL = 'https://view-api.box.com/1/sessions/2dfb390dd1d84a11925cf44e9f2d5794/content'
 
 var fs = require('fs')

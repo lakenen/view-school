@@ -6,7 +6,7 @@ var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
 var unusedHTML = fs.readFileSync(__dirname + '/../unused.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
-var exEl = document.querySelector('.exercise-content')
+var exEl = document.querySelector('.display')
 
 module.exports = {
     dirname: exName
