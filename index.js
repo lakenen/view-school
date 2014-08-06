@@ -16,7 +16,7 @@ require('portfinder').getPort(function (err, port) {
       port: port
     , exercises: require('./exercises')
     , exercisesDir: path.resolve(__dirname, 'exercises')
-    , title: 'View School'
+    , title: 'Box View School'
     , bundlerOpts: {
         builtins: browserifyBuiltins
       }
