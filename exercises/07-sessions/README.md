@@ -36,7 +36,7 @@ var params = {
 function response(err, session, response) {
   // ...
 }
-client.sessions.create(docId, params, response)
+client.sessions.create(docId, { params: params }, response)
 ```
 
 ## Resources

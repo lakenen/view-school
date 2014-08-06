@@ -19,18 +19,14 @@ The `getThumbnail` method allows you to download the PNG representation of the t
 Example:
 ```js
 var file = fs.createWriteStream('thumb.png')
-var params = {
-  width: 240,
-  height: 320
-}
+var width = 240
+var height = 320
 
 // with a callback function
-client.documents.getThumbnail(docId, params, function (err, res) {
+client.documents.getThumbnail(docId, width, height, function (err, res) {
   // do something with the response stream `res`
+  res.pipe(file)
 })
-
-// or simply pipe the response to the file
-client.documents.getThumbnail(docId, params).pipe(file)
 ```
 
 ## Resources
