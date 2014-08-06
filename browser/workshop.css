@@ -1,0 +1,13 @@
+body {
+  background: #363d43;
+}
+.browser-terminal-menu {
+  background: transparent;
+}
+.browser-terminal-menu li {
+  color: #fff;
+}
+.browser-terminal-menu li.highlighted {
+  color: #fff;
+  background-color: #527cff;
+}
