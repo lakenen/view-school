@@ -18,6 +18,7 @@ module.exports = {
   , test: test
   , setup: setup
   , testTimeout: 15000
+  , next: require('../next-exercise')(exName)
 }
 
 function requireSolution(name) {

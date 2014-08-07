@@ -19,6 +19,7 @@ module.exports = {
   , files: files
   , test: test
   , setup: setup
+  , next: require('../next-exercise')(exName)
 }
 
 function test(done) {
