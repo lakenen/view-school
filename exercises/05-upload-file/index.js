@@ -36,7 +36,7 @@ function test(done) {
     documents: {
       uploadFile: function (file, opt, cb) {
         if (file !== fileToUpload) {
-          done('HINT: the first argument to uploadFile should be the file.')
+          done('(HINT) the first argument to uploadFile should be the file.')
         }
         if (typeof opt === 'function') {
           cb = opt
@@ -44,10 +44,13 @@ function test(done) {
         }
         opt.params.name = 'view-school:05-upload-file'
         var r = this.__.uploadFile(file, opt, function (err, res) {
-          cb(err, res)
           if (err) {
             done('Looks like an API error... check the response for details')
           }
+          // set a timeout so that the response prints before "PASSED!"
+          setTimeout(function () {
+            cb(err, res)
+          }, 50)
         })
         r.on('response', function (res) {
           res.pipe(printResponse())
@@ -57,7 +60,7 @@ function test(done) {
     }
   })
   if (!fileToUpload) {
-    done('HINT: drop a file first (we left a sample in <a target="_blank" href="/open/'+exName+'">the lesson directory</a>)!')
+    done('(HINT) drop a file first (we left a sample in <a target="_blank" href="/open/'+exName+'">the lesson directory</a>)!')
   }
 
   var upload = requireSolution('upload-file')

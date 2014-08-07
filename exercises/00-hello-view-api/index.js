@@ -31,12 +31,13 @@ function test(done) {
       }
     })
   } catch (err) {
-    done('Please submit your token first!')
+    done('Please enter your token first!')
   }
 }
 
 function setup(done) {
   var exEl = document.querySelector('.display')
   exEl.innerHTML = unusedHTML
+  require('../toggle-panel').hide('display')
   done()
 }

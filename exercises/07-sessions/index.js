@@ -19,7 +19,7 @@ module.exports = {
   , files: files
   , test: test
   , setup: setup
-  , testTimeout: false
+  , testTimeout: 30000 // 30s because of retry-after
 }
 
 function requireSolution(name) {
@@ -36,7 +36,7 @@ function test(done) {
       documents: {
         uploadURL: function (url, opt, cb) {
           if (url !== DOC_URL) {
-            done('Please use the provided URL!')
+            // done('(HINT) use the provided URL!')
           }
           if (typeof opt === 'function') {
             retry = cb
@@ -64,28 +64,34 @@ function test(done) {
           }
 
           if (!opt.params) {
-            done('HINT: you\'ll need to specify some `params` with the session request')
+            done('(HINT) you\'ll need to specify some `params` with the session request')
           }
 
           if (opt.params.is_text_selectable !== false) {
-            done('HINT: remember to disable text selection')
+            done('(HINT) remember to disable text selection')
           }
           if (opt.params.duration !== 30) {
-            done('HINT: remember to set the correct duration')
+            done('(HINT) remember to set the correct duration')
           }
           if (!opt.retry) {
-            done('HINT: use the `retry` argument on sessions.create()')
+            done('(HINT) use the `retry` argument on sessions.create()')
           }
+          // we don't actually use retry, because we want to capture every
+          // request/response for printing
+          opt.retry = false
           var __ = this.__
           function makeRequest() {
             var r = __.create(id, opt, function (err, session, response) {
+              if (err) {
+                done('Looks like an API error... check the response log for details')
+              }
               if (response && response.statusCode === 202 && response.headers['retry-after']) {
                 setTimeout(makeRequest, parseInt(response.headers['retry-after'], 10) * 1000)
               } else {
-                cb(err, session, response)
-              }
-              if (err) {
-                done('Looks like an API error... check the response log for details')
+                // set a timeout so that the response prints before "PASSED!"
+                setTimeout(function () {
+                  cb(err, session, response)
+                }, 50)
               }
             })
             r.on('response', function (res) {
@@ -104,7 +110,7 @@ function test(done) {
       viewerEl.src = viewURL
       done(null, true)
     } else {
-      done('HINT: pass the view URL as an argument to the callback function')
+      done('(HINT) pass the view URL as an argument to the callback function')
     }
   })
 }

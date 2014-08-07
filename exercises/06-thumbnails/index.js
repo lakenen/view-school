@@ -17,7 +17,7 @@ module.exports = {
   , files: files
   , test: test
   , setup: setup
-  , testTimeout: false
+  , testTimeout: 15000
 }
 
 function requireSolution(name) {
@@ -34,26 +34,28 @@ function test(done) {
       getThumbnail: function (id, width, height, opt, cb) {
 
         if (typeof width !== 'number' || typeof height !== 'number') {
-          done('HINT: you should specify both a width and a height')
+          done('(HINT) you should specify both a width and a height')
         }
 
-        if (!opt) {
+        if (typeof opt === 'function') {
+          cb = opt
           opt = {}
         }
 
         if (opt.retry === true) {
-          done('Nice find, but the `retry` option makes it too easy; let\'s learn a bit about 202 responses.<br/><br/>HINT: use setTimeout with the "retry-after" header!')
+          done('Nice find, but the `retry` option makes it too easy; let\'s learn a bit about 202 responses.<br/><br/>(HINT) use setTimeout with the "retry-after" header!')
         }
 
         var r = this.__.getThumbnail(id, width, height, opt, function (err, res) {
-          cb(err, res)
           if (err) {
-            printResponse(err.error)
             done('Looks like an API error... check the response for details')
           }
+          cb(err, res)
         })
         r.on('response', function (res) {
-          res.pipe(printResponse({ ignoreBody: true }))
+          if (res.statusCode !== 200) {
+            res.pipe(printResponse({ ignoreBody: true }))
+          }
         })
         return r
       }
@@ -62,9 +64,13 @@ function test(done) {
 
   var getThumbnail = requireSolution('download-thumbnail')
   getThumbnail(function (res) {
-
+    if (!res) {
+      done('(HINT) pass the successful response object to the callback function')
+    }
+    res.pipe(printResponse({ ignoreBody: true }))
     var result = [];
     res.on('data', function (d) {
+      console.log('data')
       result.push(d)
     })
     res.on('end', function (e) {
@@ -72,14 +78,15 @@ function test(done) {
       var blob = new window.Blob([ data ])
 
       exEl.querySelector('.thumbnail-img').src = URL.createObjectURL(blob)
-      done(null, true)
+      setTimeout(function () {
+        done(null, true)
+      }, 50)
     })
   })
 }
 
 function setup(done) {
   exEl.innerHTML = indexHTML
-
   done()
 }
 

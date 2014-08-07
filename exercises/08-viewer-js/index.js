@@ -17,6 +17,7 @@ module.exports = {
   , files: files
   , test: test
   , setup: setup
+  , testTimeout: 15000
 }
 
 function requireSolution(name, ext) {
@@ -31,7 +32,7 @@ function test(done) {
   var viewer = view(document.querySelector('.viewer'), url)
 
   if (!viewer) {
-    done('HINT: your function should return a viewer instance')
+    done('(HINT) your function should return a viewer instance')
   }
 
   viewer.on('ready', function () {
@@ -39,7 +40,7 @@ function test(done) {
   })
 
   viewer.on('fail', function () {
-    done('The document failed to load. HINT: did you specify the `url` correctly?')
+    done('The document failed to load. (HINT) did you specify the `url` correctly?')
   })
 }
 

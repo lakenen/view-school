@@ -17,9 +17,12 @@ function createProxy() {
   var route = setupProxy(false)
   function proxy(req, res, next) {
     var parsed = url.parse(req.url, true)
-    if (parsed.pathname.indexOf(path.basename(process.env.BVBB_URL)) === 1) { // just after the /
-      return route(req, res)
-    }
+    try {
+      if (parsed.pathname.indexOf(path.basename(process.env.BVBB_URL)) === 1) { // just after the /
+        return route(req, res)
+      }
+    } catch (err) {}
+
     next()
   }
   return proxy

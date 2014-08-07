@@ -31,20 +31,23 @@ function test(done) {
     documents: {
       uploadURL: function (url, opt, cb) {
         if (url !== DOC_URL) {
-          done('HINT: use the provided URL!')
+          done('(HINT) use the provided URL!')
         }
         if (typeof opt === 'function' || !opt.params) {
-          done('HINT: you\'ll need to specify some `params` with the upload request')
+          done('(HINT) you\'ll need to specify some `params` with the upload request')
         }
 
         if (!opt.params.name) {
-          done('HINT: don\'t forget to specify a name')
+          done('(HINT) don\'t forget to specify a name')
         }
         var r = this.__.uploadURL(url, opt, function (err, res) {
-          cb(err, res)
           if (err) {
             done('Looks like an API error... check the response for details')
           }
+          // set a timeout so that the response prints before "PASSED!"
+          setTimeout(function () {
+            cb(err, res)
+          }, 50)
         })
         r.on('response', function (res) {
           res.pipe(printResponse())
@@ -56,7 +59,7 @@ function test(done) {
 
   var upload = requireSolution('upload-url')
   upload(DOC_URL, function (doc) {
-    if (doc.id) {
+    if (doc && doc.id) {
       done(null, true)
     } else {
       done('This does not look like a valid document response')
@@ -66,5 +69,6 @@ function test(done) {
 
 function setup(done) {
   exEl.innerHTML = unusedHTML
+  require('../toggle-panel').hide('display')
   done()
 }

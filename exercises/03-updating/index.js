@@ -33,10 +33,10 @@ function test(done) {
     documents: {
         list: function (opt, cb) {
           if (typeof opt === 'function' || !opt.params) {
-            done('HINT: you\'ll need to specify some `params` with the list request')
+            done('(HINT) you\'ll need to specify some `params` with the list request')
           }
           if (opt.params.limit !== 1) {
-            done('HINT: `limit` the request to 1 document')
+            done('(HINT) `limit` the request to 1 document')
           }
           if (opt.params.created_before) {
             done('Nice try, but `created_before` is not necessary in this exercise')
@@ -45,10 +45,13 @@ function test(done) {
             if (res && res.document_collection) {
               theId = res.document_collection.entries[0].id
             }
-            cb(err, res)
             if (err) {
               done('Looks like an API error... check the response for details')
             }
+            // set a timeout so that the response prints before "PASSED!"
+            setTimeout(function () {
+              cb(err, res)
+            }, 50)
           })
           r.on('response', function (res) {
             res.pipe(printResponse())
@@ -57,23 +60,26 @@ function test(done) {
         }
       , update: function (id, data, opt, cb) {
           if (id !== theId) {
-            done('HINT: the first argument to documents.update should be the id of the document')
+            done('(HINT) the first argument to documents.update should be the id of the document')
           }
           if (typeof opt === 'function') {
             cb = opt
             opt = {}
           }
           if (typeof data === 'function' || !data) {
-            done('HINT: you\'ll need to specify some `data` with the update request')
+            done('(HINT) you\'ll need to specify some `data` with the update request')
           }
           if (!data.name) {
-            done('HINT: remember to update the name of the document')
+            done('(HINT) remember to update the name of the document')
           }
           var r = this.__.update(id, data, opt, function (err, res) {
-            cb(err, res)
             if (err) {
               done('Looks like an API error... check the response for details')
             }
+            // set a timeout so that the response prints before "PASSED!"
+            setTimeout(function () {
+              cb(err, res)
+            }, 50)
           })
           r.on('response', function (res) {
             res.pipe(printResponse())
@@ -92,12 +98,13 @@ function test(done) {
         done('Hmm, it seems like the name is wrong...')
       }
     } else {
-      done('HINT: pass the updated document to the callback function')
+      done('(HINT) pass the updated document to the callback function')
     }
   })
 }
 
 function setup(done) {
   exEl.innerHTML = unusedHTML
+  require('../toggle-panel').hide('display')
   done()
 }

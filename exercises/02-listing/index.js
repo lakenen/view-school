@@ -35,10 +35,13 @@ function test(done) {
           opt = {}
         }
         var r = this.__.list(opt, function (err, body, response) {
-          cb(err, body)
           if (err) {
             done('Looks like an API error... check the response for details')
           }
+          // set a timeout so that the response prints before "PASSED!"
+          setTimeout(function () {
+            cb(err, body, response)
+          }, 50)
         })
         r.on('response', function (res) {
           res.pipe(printResponse())
@@ -51,7 +54,7 @@ function test(done) {
   var list = requireSolution('list')
   list(function (docs) {
     if (!docs) {
-      done('HINT: call the callback function with the document list')
+      done('(HINT) call the callback function with the document list')
     }
     if (docs.document_collection) {
       if (docs.document_collection.entries.length) {
@@ -65,5 +68,6 @@ function test(done) {
 
 function setup(done) {
   exEl.innerHTML = unusedHTML
+  require('../toggle-panel').hide('display')
   done()
 }

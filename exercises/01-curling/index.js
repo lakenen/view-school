@@ -5,7 +5,6 @@ var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
 var unusedHTML = fs.readFileSync(__dirname + '/../unused.html', 'utf8')
-var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
@@ -28,10 +27,10 @@ function test(done) {
   try {
     var request = require(curl)
     if (request.url !== 'https://view-api.box.com/1/documents') {
-      done('HINT: the URL seems to be missing or incorrect')
+      done('(HINT) the URL seems to be missing or incorrect')
     }
     if (request.options.method !== 'POST') {
-      done('HINT: the request method should be POST')
+      done('(HINT) the request method should be POST')
     }
     var data = JSON.parse(request.data || '{}')
     if (data.url && data.url !== DOC_URL) {
@@ -41,7 +40,7 @@ function test(done) {
 
     var r = request(url, request.options)
     r.pipe(concat(function (data) {
-      try {
+      setTimeout(function () {
         data = JSON.parse(data)
         if (data.type === 'document') {
           // yay
@@ -49,9 +48,7 @@ function test(done) {
         } else {
           done(data.message || 'This is not the response I was expecting')
         }
-      } catch (err) {
-        done(err)
-      }
+      }, 50)
     }))
     r.on('response', function (res) {
       res.pipe(printResponse())
@@ -62,7 +59,8 @@ function test(done) {
 }
 
 function setup(done) {
-  exEl.innerHTML = unusedHTML + indexHTML
+  exEl.innerHTML = unusedHTML
+  require('../toggle-panel').hide('display')
   done()
 }
 

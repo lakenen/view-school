@@ -1,6 +1,7 @@
 var format = require('format-response')
   , concat = require('concat-stream')
   , extend = require('extend')
+  , escape = require('escape-html')
 
 var SEPARATOR = '\n\n'
 
@@ -19,7 +20,8 @@ module.exports = function (opt) {
   var fmt = format(opt)
   fmt.on('error', function () { /* ignore (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ */ })
   fmt.pipe(concat(function (str) {
-    opt.el.innerText += str.toString() + (opt.ignoreBody ? '[response body ignored]' : '') + SEPARATOR
+    str = str.toString() + (opt.ignoreBody ? '[...]' : '') + SEPARATOR
+    opt.el.innerHTML += escape(str)
     opt.el.scrollTop = opt.el.scrollHeight
   }))
   return fmt

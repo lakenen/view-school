@@ -1,3 +1,3 @@
 module.exports = function (b) {
-  b.transform(require.resolve('cssify'))
+  b.transform({ global: true }, require.resolve('cssify'))
 }
