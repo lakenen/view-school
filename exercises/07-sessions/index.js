@@ -3,7 +3,7 @@ var printResponse = require('../print-response')
 
 var exName = path.basename(__dirname)
 var exEl = document.querySelector('.display')
-var DOC_URL = 'https://view-api.box.com/1/sessions/2dfb390dd1d84a11925cf44e9f2d5794/content'
+var DOC_URL = 'https://github.com/lakenen/view-school-assets/raw/master/2.pdf'
 
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')

@@ -1,6 +1,18 @@
 # Lesson Six: Creating a Viewing Session
 
-... informative and insightful intro ...
+Great work so far! At this point you're probably wondering _when will I get to see the converted documents?!_ You've completed five lessons so far and have yet to experience what the API is really good for... so let's get to it!
+
+## Creating Sessions
+
+When you upload a file for conversion, it goes into a queue for processing. While the View API is very fast, the document will not be instantly ready for viewing, so you can't create a session immediately following an upload. Sessions can be created as soon as the document is `viewable`. This means that the necessary assets have been generated to view *at least* the first page of the document. As such, if your try to create a session immediately after uploading a document, it's likely not going to be viewable yet. In this case, the API will respond with `202 Accepted`, which means basically:
+
+> "We've acknowledged your request, but it's still processing... check back later."
+
+In the View API, a `202` response will be accompanied by a `'Retry-After'` header, which specifies the time in seconds to wait before retrying your request.
+
+While this approach is better than simply polling the `/documents/{id}` endpoint, there's actually an even better way: [web hooks](https://developers.box.com/view-webhooks/). Unfortunately, there's not an easy way to try out web hooks for this workshop, but please check them out if you plan to use the View API in production!
+
+The `box-view` node package has the ability to auto-retry requests when the response contains the `Retry-After` header, so we'll use that functionality for this exercise.
 
 ## Your Task
 
@@ -15,12 +27,7 @@ Put your solution in `upload-and-view.js` in [this project's directory](/open/06
 
 The `sessions.create()` method makes a POST request to the `/sessions` endpoint. This will attempt to create a viewing session for the specified document.
 
-Sessions can be created as soon as the document is `viewable`. This means that the necessary assets have been generated to view *at least* the first page of the document. As such, if your try to create a session immediately after uploading a document, it's likely not going to be viewable yet. In this case, the API will respond with a `202 Accepted`, which means basically:
-
-> we've acknowledged your request, but it's still processing... check back later
-
-In the View API, a `202` response will be accompanied by a `'retry-after'` header, which specifies the time in seconds to wait before retrying your request.
-
+The method also accepts an `options` argument with which you can specify session creation parameters `params`. You can also use the `options` argument to specify whether to auto-retry requests with `{ retry: true }`.
 
 Example:
 ```js
@@ -33,10 +40,14 @@ var params = {
   is_downloadable: true, // default: false
   is_text_selectable: true // default: true
 }
+var options = {
+  params: params,
+  retry: true // auto-retry the request if necessry
+}
 function response(err, session, response) {
   // ...
 }
-client.sessions.create(docId, { params: params }, response)
+client.sessions.create(docId, options, response)
 ```
 
 ## Resources
