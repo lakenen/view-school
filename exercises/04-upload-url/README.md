@@ -1,6 +1,8 @@
 # Lesson Five: Uploading a Document by URL
 
-... informative and insightful intro ... (something about document names too)
+When you make a well-formed upload request to the View API (whether it's a multi-part POST or a URL upload), the API will respond with `HTTP 202 Accepted`. This means that the API has received the request and it will be queued for processing. You can use the [/documents/{id} GET](https://developers.box.com/view/#get-documents-id) endpoint to later check the conversions status of a document, but we'll go more into that stuff in a little bit.
+
+The `box-view` package abstracts both URL and multi-part uploads. For this exercise, we'll take a look at URL uploads.
 
 ## Your Task
 
