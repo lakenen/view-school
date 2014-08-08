@@ -6,9 +6,7 @@ var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
-require('../viewer')
-
-var url = 'https://view-api.box.com/1/sessions/2dfb390dd1d84a11925cf44e9f2d5794/assets'
+var url = 'https://view-api.box.com/1/sessions/b1d79d7b69a24c8a97cda45bfff07138/assets'
 
 module.exports = {
     dirname: exName
@@ -48,5 +46,6 @@ function test(done) {
 function setup(done) {
   var exEl = document.querySelector('.display')
   exEl.innerHTML = indexHTML
+  require('../viewer')
   done()
 }
