@@ -27,15 +27,19 @@ function requireSolution(name, ext) {
 function test(done) {
   requireSolution('styles', 'css')
   var view = requireSolution('view-document')
-
-  var viewer = view(document.querySelector('.viewer'), url)
+    , el = document.querySelector('.viewer')
+    , viewer = view(el, url)
 
   if (!viewer) {
     done('(HINT) your function should return a viewer instance')
   }
 
   viewer.on('ready', function () {
-    done(null, true)
+    if (parseInt(window.getComputedStyle(el).height) > 0) {
+      done(null, true)
+    } else {
+      done('(HINT) make sure you specify a height for your viewer in the CSS file')
+    }
   })
 
   viewer.on('fail', function () {
