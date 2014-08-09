@@ -17,16 +17,18 @@ body {
   color: white;
   border: 4px dashed #fff;
   position: absolute;
-  top: 1em;
-  bottom: 1em;
-  left: 1em;
-  right: 1em;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 2em;
+  min-height: 200px;
+  margin: 1em;
 }
 
 .thumbnail {
