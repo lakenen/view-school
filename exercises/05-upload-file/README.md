@@ -1,6 +1,7 @@
 # Lesson Six: Uploading a Document
 
-... informative and insightful intro ...
+While uploading by URL is the easiest and preferred method, sometimes it's not feasible within your application. This is why the document upload endpoint exists.
+
 
 ## Your Task
 
@@ -9,6 +10,7 @@ In this exercise, you'll write a node module `upload-file`:
 - when called, the function should upload the file to the View API, then call the callback function with the result
 
 Put your solution in `upload-file.js` in [this project's directory](/open/05-upload-file).
+
 
 ## uploadFile
 
@@ -32,6 +34,12 @@ client.documents.uploadFile(file, response)
 var fileBuffer = fs.readFileSync(filename)
 client.documents.uploadFile(fileBuffer, response)
 ```
+
+
+## Multipart Requests
+
+The multipart upload endpoint **uses a different URL than the other API endpoints**. This is due to the blocking nature of multipart uploads. The URL to use if you are making requests with cURL or writing your own client is: `https://upload.view-api.box.com/1/documents`. Also, when uploading to this endpoint, you should specify the header: `Content-Type: multipart/form-data`. However, the `box-view` node package abstracts these things away, so you don't have to worry about it in this exercise.
+
 
 ## Resources
 
