@@ -3,7 +3,8 @@ var extend = require('extend')
 var bv, createClient
 
 module.exports.mock = function (mocks) {
-  bv = require('box-view')
+  var boxview = 'box-view'
+  bv = require(boxview)
   createClient = bv.createClient
   bv.createClient = function (token) {
     var client = createClient(token)

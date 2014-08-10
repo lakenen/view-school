@@ -19,11 +19,12 @@ module.exports = {
 function test(done) {
   // required name is separate so browserify doesnt try to require it in this bundle
   var token = 'token.js'
+    , boxview = 'box-view'
     , client
 
   try {
     token = require(token)
-    client = require('box-view').createClient(token)
+    client = require(boxview).createClient(token)
     client.documents.list(function (err) {
       if (err) {
         done('This token does not appear to be valid.')

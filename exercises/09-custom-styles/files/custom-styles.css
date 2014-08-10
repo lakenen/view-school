@@ -1,7 +1,11 @@
 .crocodoc-viewer {
-
+  height: 100%;
 }
 
 .crocodoc-viewport {
   background: #fff;
+}
+
+.crocodoc-page {
+
 }
