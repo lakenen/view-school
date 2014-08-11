@@ -6,7 +6,7 @@ The View API automatically creates a full-size PNG representation of the first p
 
 In this exercise, you'll write a node module `download-thumbnail`:
 - export a function that takes a callback function as an argument
-- when called, the function should make a request to the View API for a thumbnail for a document of your choice (hint: go back to [02-listing]('/02-listing') to get a document id), with a size of your choice, then call the callback function with the response object
+- when called, the function should make a request to the View API for a thumbnail for a document of your choice (hint: go back to [02-listing](/02-listing) to get a document id), with a size of your choice, then call the callback function with the response object
 
 Put your solution in `download-thumbnail.js` in [this project's directory](/open/06-thumbnails).
 
