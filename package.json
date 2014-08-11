@@ -8,7 +8,7 @@
     "browser-workshopper": "^0.0.2",
     "byte-size": "^0.1.0",
     "concat-stream": "^1.4.6",
-    "cssify": "https://github.com/lakenen/cssify/tarball/return-sheet",
+    "cssify": "^0.6.0",
     "curlify": "^0.1.2",
     "domify": "^1.3.0",
     "drag-and-drop-files": "^0.0.1",
