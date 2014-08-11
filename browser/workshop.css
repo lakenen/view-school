@@ -72,3 +72,8 @@ body {
 .sidebar pre code {
   font-weight: normal;
 }
+
+.exercise__10-viewer-configs .viewer {
+  height: 100%;
+  background: #fff;
+}
