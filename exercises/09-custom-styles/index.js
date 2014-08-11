@@ -9,7 +9,9 @@ var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
-var currentViewer
+var currentViewer,
+  // japanese-haikus
+  url = 'https://view-api.box.com/1/sessions/6ebeaf32b9f24c5380fd64594c99c3db/assets'
 
 module.exports = {
     dirname: exName
@@ -60,7 +62,7 @@ function test(done) {
       , $content = $page.find('.crocodoc-page-content')
 
     var bgcolor = parseColor($viewport.css('background-color')).hex
-    if (bgcolor !== '#feeffe') {
+    if (bgcolor !== '#fbfefa') {
       done('(HINT) don\'t forget to set the viewport background!')
     }
 
@@ -89,7 +91,7 @@ function test(done) {
   // show the actual viewer
   var el = document.querySelector('.viewer')
   var viewer = Crocodoc.createViewer(el, {
-    url: '/assets'
+      url: url
   })
 
   currentViewer = viewer
@@ -105,5 +107,27 @@ function setup(done) {
   var exEl = document.querySelector('.display')
   exEl.innerHTML = indexHTML
   require('../viewer')
+
+  // overwrite lazyloader to make it slow. yay hacks!
+  var lazyloader = Crocodoc.components['lazy-loader'].creator
+  Crocodoc.components['lazy-loader'].creator = function () {
+    var l = lazyloader.apply(null, arguments)
+      , q = l.queuePageToLoad
+      , c = l.cancelAllLoading.bind(l)
+      , tids = []
+      , i = 0
+
+    l.queuePageToLoad = function (index) {
+      tids.push(setTimeout(q.bind(l, index), (++i) * 1000))
+    }
+    l.cancelAllLoading = function () {
+      tids.forEach(clearTimeout)
+      tids.length = 0
+      i = 0
+      c()
+    }
+    return l
+  }
+
   done()
 }
