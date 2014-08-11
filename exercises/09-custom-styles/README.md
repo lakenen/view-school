@@ -14,7 +14,7 @@ Write some CSS to do the following:
 - use `padding` to give the pages more space (`200px`) on the left and right sides
 - use `box-shadow` to apply a transparent black (`rgba(0, 0, 0, 0.5)`) shadow to each page
 - use `background-color` to give the viewport a background color of `#feeffe`
-- use `background-image` to add a [loading indicator](https://raw.githubusercontent.com/lakenen/view-school-assets/master/spinner.gif) that shows up when pages are loading
+- use `background-image` to add [this loading indicator](https://raw.githubusercontent.com/lakenen/view-school-assets/master/spinner.gif) to show up when pages are loading
 
 Put your solution in `custom-styles.css` in [this project's directory](/open/09-custom-styles).
 

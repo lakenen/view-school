@@ -24,14 +24,14 @@ var params = {
   non_svg: true,
   name: 'my example file',
   thumbnails: '256×256' // pre-generate thumbnails
-}
+};
 var options = {
   params: params
-}
-var url = 'http://example.com/file.pdf'
+};
+var url = 'http://example.com/file.pdf';
 client.documents.uploadURL(url, options, function (err, doc) {
   // ...
-})
+});
 ```
 
 See the documentation links below for more information.

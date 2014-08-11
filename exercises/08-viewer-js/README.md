@@ -1,6 +1,8 @@
 # Lesson Nine: Viewer.JS
 
-*intro about viewer.js*
+Using the `iframe` viewer is a great way to get up and running with the View API in no time. However, if you want to really customize and deeply integrate documents into your application, then you'll probably want to use viewer.js.
+
+Viewer.js is a small client-side library for rendering and interacting with View API documents which provides incredible flexibility in building applications around documents. In this exercise, we'll see how easy it is to view a document with viewer.js.
 
 
 ## Your Task
@@ -19,9 +21,9 @@ Creating a viewer with viewer.js is very simple -- just a few lines of code!
 ```js
 var viewer = Crocodoc.createViewer('.my-viewer', {
   url: mySessionAssetsURL
-})
+});
 
-viewer.load()
+viewer.load();
 ```
 
 Calling `load()` will load some metadata and styles required for the whole document immediately, but the viewer will continue to load pages for long documents on a lazy basis as necessary (i.e., as the user scrolls or pages through a document).
@@ -37,7 +39,7 @@ Calling `load()` will load some metadata and styles required for the whole docum
 
 ## Crocodoc
 
-*why is it Crocodoc.createViewer?*
+You might be wondering *what's with the `Crocodoc` namespace?* Crocodoc originally created viewer.js and the core conversion technology behind the Box View API. After Box acquired Crocodoc in May, 2013, the Crocodoc team started working on the View API. Instead of going through the hassle of changing the entire namespace, we decided to keep it around. Besides, we think it's an awesome name! :)
 
 
 ## Resources

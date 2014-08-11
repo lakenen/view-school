@@ -18,15 +18,15 @@ The `getThumbnail` method allows you to download the PNG representation of the t
 
 Example:
 ```js
-var file = fs.createWriteStream('thumb.png')
-var width = 240
-var height = 320
+var file = fs.createWriteStream('thumb.png');
+var width = 240;
+var height = 320;
 
 // with a callback function
 client.documents.getThumbnail(docId, width, height, function (err, res) {
   // do something with the response stream `res`
-  res.pipe(file)
-})
+  res.pipe(file);
+});
 ```
 
 ## Resources

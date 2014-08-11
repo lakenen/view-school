@@ -23,16 +23,16 @@ function response(err, doc) {
 }
 
 // by filename
-var filename = process.cwd() + '/example/file.pdf'
-client.documents.uploadFile(filename, response)
+var filename = process.cwd() + '/example/file.pdf';
+client.documents.uploadFile(filename, response);
 
 // by readable stream
-var file = fs.createReadStream(filename)
-client.documents.uploadFile(file, response)
+var file = fs.createReadStream(filename);
+client.documents.uploadFile(file, response);
 
 // by buffer
-var fileBuffer = fs.readFileSync(filename)
-client.documents.uploadFile(fileBuffer, response)
+var fileBuffer = fs.readFileSync(filename);
+client.documents.uploadFile(fileBuffer, response);
 ```
 
 

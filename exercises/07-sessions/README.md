@@ -14,6 +14,20 @@ While this approach is better than simply polling the `/documents/{id}` endpoint
 
 The `box-view` node package has the ability to auto-retry requests when the response contains the `Retry-After` header, so we'll use that functionality for this exercise.
 
+
+## The `iframe` Viewer
+
+The Box View API offers two ways to view your documents: the `iframe` viewer, and viewer.js. We'll get to viewer.js in the next several exercises, but for this exercise, we'll use the `iframe` viewer. When you receive a successful session response, there will be a set of URLs in the response body. The `view` URL can be used as the `src` of an `iframe` element to show the document in a simple viewer.
+
+In this exercise, the workshop takes care of actually embedding the `iframe` for you, but normally it should take this form:
+
+```html
+<iframe src="https://view-api.box.com/1/sessions/{id}/view?theme=dark" allowfullscreen></iframe>
+```
+
+You can specify the dark theme by appending `?theme=dark` to the session `view` URL (`light` can also be specified, but it is the default theme, so it has no effect).
+
+
 ## Your Task
 
 In this exercise, you'll write a node module `upload-and-view`:
@@ -31,7 +45,7 @@ The method also accepts an `options` argument with which you can specify session
 
 Example:
 ```js
-var docId = 'some uuid'
+var docId = 'some uuid';
 var params = {
   duration: 1440, // minutes, default: 60
   // or e.g.,
@@ -39,18 +53,19 @@ var params = {
 
   is_downloadable: true, // default: false
   is_text_selectable: true // default: true
-}
+};
 var options = {
   params: params,
   retry: true // auto-retry the request if necessry
-}
+};
 function response(err, session, response) {
   // ...
-}
-client.sessions.create(docId, options, response)
+};
+client.sessions.create(docId, options, response);
 ```
 
 ## Resources
 
 * [/sessions POST](https://developers.box.com/view/#post-sessions) View API documentation
 * [sessions.create](https://www.npmjs.org/package/box-view#create) `box-view` documentation
+* [iframe viewer](https://developers.box.com/view/#view-a-document) documentation

@@ -7,7 +7,7 @@ The `box-view` package is a high-level SDK that abstracts away the raw HTTP requ
 *Don't see an SDK in your preferred language? Write one, and we'll happily list it with the others.*
 
 ```js
-var client = require('box-view').createClient('mytoken')
+var client = require('box-view').createClient('mytoken');
 
 // client.documents contains methods
 // for the /documents endpoint

@@ -1,5 +1,7 @@
 var path = require('path')
 var loadCSS = require('../load-css')
+var parseColor = require('parse-color')
+
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
@@ -40,8 +42,52 @@ function test(done) {
     currentViewer.destroy()
   }
 
-  var el = document.querySelector('.viewer')
+  var $div = $('<div>').css({
+      position: 'absolute'
+    , top: -10000
+    , left: -10000
+  }).appendTo(document.body)
 
+  var _done = done
+  done = function () {
+    $div.remove()
+    _done.apply(null, arguments)
+  }
+
+  function testCSS() {
+    var $viewport = $('<div class="crocodoc-viewport">').appendTo($div)
+      , $page = $('<div class="crocodoc-page"><div class="crocodoc-page-content"></div></div>').appendTo($viewport)
+      , $content = $page.find('.crocodoc-page-content')
+
+    var bgcolor = parseColor($viewport.css('background-color')).hex
+    if (bgcolor !== '#feeffe') {
+      done('(HINT) don\'t forget to set the viewport background!')
+    }
+
+    var padding = $page.css('padding')
+      , shadow = parseColor($content.css('box-shadow')).rgba
+
+    if (!/\d+px\s+200px(\s+\d+px\s+200px)?/.test(padding)) {
+      done('(HINT) don\'t forget to set a 200px horizontal page spacing!')
+    }
+
+    if (!shadow || !(shadow[0] === 0 && shadow[1] === 0 && shadow[2] === 0 && shadow[3] < 1)) {
+      done('(HINT) don\'t forget to set a transparent black box shadow on the page content!')
+    }
+
+    $page.addClass('crocodoc-page-loading')
+
+    var bg = $content.css('background')
+
+    if (bg.indexOf('https://raw.githubusercontent.com/lakenen/view-school-assets/master/spinner.gif') === -1) {
+      done('(HINT) don\'t forget to add the loading indicator!')
+    }
+
+    done(null, true)
+  }
+
+  // show the actual viewer
+  var el = document.querySelector('.viewer')
   var viewer = Crocodoc.createViewer(el, {
     url: '/assets'
   })
@@ -51,8 +97,7 @@ function test(done) {
   viewer.load()
 
   viewer.on('ready', function () {
-    setTimeout(function () { done('no') })
-    // done(null, true)
+    setTimeout(testCSS)
   })
 }
 
