@@ -42,6 +42,13 @@ Calling `load()` will load some metadata and styles required for the whole docum
 You might be wondering *what's with the `Crocodoc` namespace?* Crocodoc originally created viewer.js and the core conversion technology behind the Box View API. After Box acquired Crocodoc in May, 2013, the Crocodoc team started working on the View API. Instead of going through the hassle of changing the entire namespace, we decided to keep it around. Besides, we think it's an awesome name! :)
 
 
+## Node?
+
+`(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`
+
+You might also be wondering what the deal is with `module.exports` in this client-side code. This workshop is built using [browserify](http://browserify.org/), and writing modules with node's module syntax makes it much simpler to test the solutions!
+
+
 ## Resources
 
 * [viewer.js](https://github.com/box/viewer.js/blob/master/README.md) documentation
