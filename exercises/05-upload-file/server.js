@@ -1,1 +1,1 @@
-module.exports = require('../server-common')
+module.exports = require('../proxy')()
