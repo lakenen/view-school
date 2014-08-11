@@ -1,4 +1,4 @@
-# Lesson Six: Uploading a Document
+# Lesson Five: Uploading a Document
 
 While uploading by URL is the easiest and most preferred method, sometimes it's not feasible within your application. This is why the document multipart upload endpoint exists. With this endpoint, you can upload files via multipart POST requests.
 

@@ -1,4 +1,4 @@
-# Lesson Four: Updating a Document
+# Lesson Three: Updating a Document
 
 The `box-view` package can do much more than simply listing uploaded documents, of course. In this exercise, we'll combine a couple of API calls to fetch and rename a document.
 

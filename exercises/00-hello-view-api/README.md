@@ -1,4 +1,4 @@
-# Lesson One: Hello, View API
+# Lesson Zero: Hello, View API
 
 Welcome to View School!
 

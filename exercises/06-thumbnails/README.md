@@ -1,4 +1,4 @@
-# Lesson Seven: Downloading Thumbnails
+# Lesson Six: Downloading Thumbnails
 
 The View API automatically creates a full-size PNG representation of the first page of every document you upload. This can be used to generate thumbnail images for use in your applications. In this exercise, we'll generate a thumbnail and display it in the browser!
 

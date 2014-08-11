@@ -1,4 +1,4 @@
-# Lesson Six: Creating a Viewing Session
+# Lesson Seven: Creating a Viewing Session
 
 Great work so far! At this point you're probably wondering _when will I get to see the converted documents?!_ You've completed five lessons so far and have yet to experience what the API is really good for... so let's get to it!
 

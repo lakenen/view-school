@@ -1,4 +1,4 @@
-# Lesson Three: Listing Uploaded Documents
+# Lesson Two: Listing Uploaded Documents
 
 In this lesson, you will use the [box-view](https://www.npmjs.org/package/box-view) node package to fetch a list of your documents.
 

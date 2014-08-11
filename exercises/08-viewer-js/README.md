@@ -1,4 +1,4 @@
-# Lesson Nine: Viewer.JS
+# Lesson Eight: Viewer.JS
 
 Using the `iframe` viewer is a great way to get up and running with the View API in no time. However, if you want to really customize and deeply integrate documents into your application, then you'll probably want to use viewer.js.
 
@@ -7,7 +7,7 @@ Viewer.js is a small client-side library for rendering and interacting with View
 
 ## Your Task
 
-In this exercise, you'll write a javascript module `view-document.js`:
+In this exercise, you'll write a javascript module `view-document`:
 - export a function that takes two arguments: an Element and string URL
 - when called, the function should create a viewer instance with the given element and asset URL, then `load()` the document and return the viewer instance
 

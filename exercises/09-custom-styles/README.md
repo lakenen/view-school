@@ -1,4 +1,4 @@
-# Lesson Ten: Custom Styles
+# Lesson Nine: Custom Styles
 
 > A borderless page...
 >   It neither begins nor ends.

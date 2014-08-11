@@ -1,4 +1,4 @@
-# Lesson Two: cURLing
+# Lesson One: cURLing
 
 [cURL](http://curl.haxx.se/) is a tool that allows you to make arbitrary HTTP requests from the command line.
 
