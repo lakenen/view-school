@@ -22,7 +22,10 @@ The Box View API offers two ways to view your documents: the `iframe` viewer, an
 In this exercise, the workshop takes care of actually embedding the `iframe` for you, but normally it should take this form:
 
 ```html
-<iframe src="https://view-api.box.com/1/sessions/{id}/view?theme=dark" allowfullscreen></iframe>
+<iframe
+  src="https://view-api.box.com/1/sessions/{id}/view?theme=dark"
+  allowfullscreen>
+</iframe>
 ```
 
 You can specify the dark theme by appending `?theme=dark` to the session `view` URL (`light` can also be specified, but it is the default theme, so it has no effect).

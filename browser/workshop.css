@@ -64,3 +64,11 @@ body {
 .exercise__09-custom-styles .display {
   background-color: #fff;
 }
+
+.sidebar p code,
+.sidebar h2 code {
+  font-weight: bold;
+}
+.sidebar pre code {
+  font-weight: normal;
+}
