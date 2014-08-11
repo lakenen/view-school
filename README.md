@@ -5,7 +5,7 @@ A self-paced, interactive workshop that teaches the basics of building on the [V
 
 ## What You'll Need
 
-To do this workshop, you'll need a basic knowledge of JavaScript and CSS, as well as a fairly decent understanding of how to use the Unix command line and the Internet. You'll also need a recent version of NodeJS, and a modern browser.
+To do this workshop, you'll need a basic knowledge of JavaScript, HTML, and CSS, as well as a decent understanding of how to use the Unix command line and the Internet. You'll also need a recent version of NodeJS, and a modern browser.
 
 
 ## Install

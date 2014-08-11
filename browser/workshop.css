@@ -56,6 +56,19 @@ body {
   text-align: center;
 }
 
+.sidebar p code,
+.sidebar h2 code {
+  font-weight: bold;
+}
+.sidebar pre code {
+  font-weight: normal;
+}
+
+.exercise__07-sessions .viewer {
+  min-height: 400px;
+  background: #fff;
+}
+
 .exercise__09-custom-styles .sidebar blockquote {
   text-align: center;
   white-space: pre-wrap;
@@ -63,14 +76,6 @@ body {
 
 .exercise__09-custom-styles .display {
   background-color: #fff;
-}
-
-.sidebar p code,
-.sidebar h2 code {
-  font-weight: bold;
-}
-.sidebar pre code {
-  font-weight: normal;
 }
 
 .exercise__10-viewer-configs .viewer {

@@ -54,6 +54,9 @@ function test(done) {
   if (config.layout !== window.Crocodoc.LAYOUT_HORIZONTAL) {
     done('(HINT) remember to set the correct layout!')
   }
+  if (config.zoom !== window.Crocodoc.ZOOM_FIT_HEIGHT) {
+    done('(HINT) remember to set the correct zoom!')
+  }
 
   viewer.on('ready', function () {
     done(null, true)

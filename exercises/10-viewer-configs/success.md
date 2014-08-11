@@ -1,14 +1,14 @@
 ```
-                   _   _  ___   ___  ____      _ __   __
-                  | | | |/ _ \ / _ \|  _ \    / \\ \ / /
-                  | |_| | | | | | | | |_) |  / _ \\ V /
-                  |  _  | |_| | |_| |  _ <  / ___ \| |
-                  |_| |_|\___/ \___/|_| \_\/_/   \_\_|
+                 __        ___    _   _  ___   ___  _
+                 \ \      / / \  | | | |/ _ \ / _ \| |
+                  \ \ /\ / / _ \ | |_| | | | | | | | |
+                   \ V  V / ___ \|  _  | |_| | |_| |_|
+                    \_/\_/_/   \_\_| |_|\___/ \___/(_)
 
 -------------------------- ===================== --------------------------
 ```
 
-See how easy that was? This is only scratching the surface of what viewer.js can do. Hang tight-we'll get to some more interesting stuff in the next few exercises!
+As you can see, viewer.js is extremely configurable. In the next exercise, we'll look at some of the functionality available on a viewer instance.
 
 ```
 -------------------------- ===================== --------------------------

@@ -9,6 +9,7 @@ In this exercise, you'll write a javascript module `draggy-viewer`:
 - create, `load()`,  and return a viewer instance with the following configuration:
   + enable text selection
   + enable click + drag
+  + set initial zoom to fit the document to the height of the viewport
   + use "horizontal" layout
 
 Put your javascript solution in `draggy-viewer.js` in [this project's directory](/open/10-viewer-configs).

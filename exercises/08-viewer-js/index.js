@@ -7,6 +7,7 @@ var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
+// congratulations/viewer.js doc
 var url = 'https://view-api.box.com/1/sessions/b1d79d7b69a24c8a97cda45bfff07138/assets'
   , currentViewer
 
