@@ -1,4 +1,5 @@
 var path = require('path')
+var loadCSS = require('../load-css')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
@@ -7,6 +8,7 @@ var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
 var url = 'https://view-api.box.com/1/sessions/b1d79d7b69a24c8a97cda45bfff07138/assets'
+  , currentViewer
 
 module.exports = {
     dirname: exName
@@ -17,6 +19,7 @@ module.exports = {
   , setup: setup
   , testTimeout: 15000
   , next: require('../next-exercise')(exName)
+  , update: updateCSS
 }
 
 function requireSolution(name, ext) {
@@ -24,11 +27,22 @@ function requireSolution(name, ext) {
   return require(name + '.' + (ext || 'js'))
 }
 
+function updateCSS() {
+  loadCSS('styles.css')
+}
+
 function test(done) {
-  requireSolution('styles', 'css')
+  updateCSS()
+
+  if (currentViewer) {
+    currentViewer.destroy()
+  }
+
   var view = requireSolution('view-document')
     , el = document.querySelector('.viewer')
     , viewer = view(el, url)
+
+  currentViewer = viewer
 
   if (!viewer) {
     done('(HINT) your function should return a viewer instance')

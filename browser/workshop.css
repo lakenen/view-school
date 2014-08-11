@@ -55,3 +55,12 @@ body {
 .display-unused {
   text-align: center;
 }
+
+.exercise__09-custom-styles .sidebar blockquote {
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+.exercise__09-custom-styles .display {
+  background-color: #fff;
+}

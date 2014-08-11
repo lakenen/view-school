@@ -1,10 +1,13 @@
 var path = require('path')
+var loadCSS = require('../load-css')
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
 var success = fs.readFileSync(__dirname + '/success.md', 'utf8')
 var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
+
+var currentViewer
 
 module.exports = {
     dirname: exName
@@ -15,6 +18,7 @@ module.exports = {
   , setup: setup
   , testTimeout: 15000
   , next: require('../next-exercise')(exName)
+  , update: update
 }
 
 function requireSolution(name, ext) {
@@ -22,16 +26,33 @@ function requireSolution(name, ext) {
   return require(name + '.' + (ext || 'js'))
 }
 
+function update() {
+  loadCSS('custom-styles.css')
+  if (currentViewer) {
+    currentViewer.updateLayout()
+  }
+}
+
 function test(done) {
-  requireSolution('custom-styles', 'css')
+  update()
+
+  if (currentViewer) {
+    currentViewer.destroy()
+  }
+
   var el = document.querySelector('.viewer')
+
   var viewer = Crocodoc.createViewer(el, {
     url: '/assets'
   })
+
+  currentViewer = viewer
+
   viewer.load()
 
   viewer.on('ready', function () {
-    done(null, true)
+    setTimeout(function () { done('no') })
+    // done(null, true)
   })
 }
 

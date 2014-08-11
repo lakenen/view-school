@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
       res.setHeader('Access-Control-Allow-Headers', '*')
       res.setHeader('Access-Control-Allow-Methods', 'GET')
       hyperquest.get(url).pipe(res)
-    }, 1000)
+    }, 0)
     return
   }
   next()
