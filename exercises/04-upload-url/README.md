@@ -23,7 +23,7 @@ Example:
 var params = {
   non_svg: true,
   name: 'my example file',
-  thumbnails: '256×256' // pre-generate thumbnails
+  thumbnails: '256x256' // pre-generate thumbnails
 };
 var options = {
   params: params
