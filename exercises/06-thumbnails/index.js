@@ -55,7 +55,7 @@ function test(done) {
         })
         r.on('response', function (res) {
           if (res.statusCode !== 200) {
-            res.pipe(printResponse({ ignoreBody: true }))
+            res.pipe(printResponse())
           }
         })
         return r
@@ -68,10 +68,12 @@ function test(done) {
     if (!res) {
       done('(HINT) pass the successful response object to the callback function')
     }
+    if (res.statusCode === 202) {
+      done('(HINT) retry your request if you get a 202 response code (see the bit about `retry-after` in the instructions!)')
+    }
     res.pipe(printResponse({ ignoreBody: true }))
     var result = [];
     res.on('data', function (d) {
-      console.log('data')
       result.push(d)
     })
     res.on('end', function (e) {
