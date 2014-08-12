@@ -64,8 +64,8 @@ body {
   font-weight: normal;
 }
 
-.exercise__07-sessions .viewer {
-  min-height: 400px;
+.exercise__07-sessions.passed .display {
+  min-height: 400px !important;
   background: #fff;
 }
 
