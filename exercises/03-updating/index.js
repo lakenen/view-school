@@ -33,8 +33,9 @@ function test(done) {
   boxViewMock.mock({
     documents: {
         list: function (opt, cb) {
-          if (typeof opt === 'function' || !opt.params) {
-            done('(HINT) you\'ll need to specify some `params` with the list request')
+          if (typeof opt === 'function') {
+            cb = opt
+            opt = { params: {} }
           }
           if (opt.params.created_before) {
             done('Nice try, but `created_before` is not necessary in this exercise')
