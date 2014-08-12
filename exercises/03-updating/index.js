@@ -37,7 +37,7 @@ function test(done) {
             cb = opt
             opt = { params: {} }
           }
-          if (opt.params.created_before) {
+          if (opt.params && opt.params.created_before) {
             done('Nice try, but `created_before` is not necessary in this exercise')
           }
           var r = this.__.list(opt, function (err, res) {
