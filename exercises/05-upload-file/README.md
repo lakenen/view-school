@@ -18,21 +18,21 @@ Aside from specifying a file rather than a URL, the `uploadFile` method behaves 
 
 Example:
 ```js
-function response(err, doc) {
+function handleResponse(err, doc) {
   // `doc` is the JSON-parsed response body
 }
 
 // by filename
 var filename = process.cwd() + '/example/file.pdf';
-client.documents.uploadFile(filename, response);
+client.documents.uploadFile(filename, handleResponse);
 
 // by readable stream
 var file = fs.createReadStream(filename);
-client.documents.uploadFile(file, response);
+client.documents.uploadFile(file, handleResponse);
 
 // by buffer
 var fileBuffer = fs.readFileSync(filename);
-client.documents.uploadFile(fileBuffer, response);
+client.documents.uploadFile(fileBuffer, handleResponse);
 ```
 
 

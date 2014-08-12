@@ -43,12 +43,12 @@ var params = {
 };
 var options = {
   params: params,
-  retry: true // auto-retry the request if necessry
+  retry: true // auto-retry the request if necessary
 };
-function response(err, session, response) {
+function handleResponse(err, session, response) {
   // `session` is the JSON-parsed response body
 };
-client.sessions.create(docId, options, response);
+client.sessions.create(docId, options, handleResponse);
 ```
 
 
