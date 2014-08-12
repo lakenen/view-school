@@ -22,9 +22,12 @@ module.exports.mock = function (mocks) {
       plugins: { 'expose-config': true }
     })
     var viewer = createViewer(el, conf)
-      , mock = extend(true, viewer, mocks)
-    mock.__ = viewer
-    return mock
+    Object.keys(mocks).forEach(function (method) {
+      var orig = viewer[method]
+      viewer[method] = mocks[method]
+      viewer['_' + method] = orig
+    })
+    return viewer
   }
 }
 

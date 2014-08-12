@@ -32,8 +32,22 @@ function test(done) {
     currentViewer.destroy()
   }
 
+  var scrollTo = function () {
+    scrollTo.calledWith = arguments
+    this._scrollTo.apply(this, arguments)
+  }
+  scrollTo.calledWith = []
+  var zoom = function () {
+    zoom.calledWith = arguments
+    this._zoom.apply(this, arguments)
+  }
+  zoom.calledWith = []
+
   viewerMock.restore()
-  viewerMock.mock()
+  viewerMock.mock({
+      scrollTo: scrollTo
+    , zoom: zoom
+  })
 
   var view = requireSolution('simple-controls')
     , el = document.querySelector('.viewer')
@@ -52,15 +66,15 @@ function test(done) {
   }
 
   function testButtons(numPages) {
-    function reset() {
+    function reset(full) {
+      viewer.off('zoom', testZoomUpdatesButtons)
+      viewer.off('pagefocus', testPagefocusUpdatesButtons)
       viewer.zoom(Crocodoc.ZOOM_AUTO)
       viewer.scrollTo(1)
     }
 
     function ok(k, msg) {
       if (!k) {
-        viewer.off('zoom')
-        viewer.off('pagefocus')
         reset()
         done(msg)
       }
@@ -70,12 +84,12 @@ function test(done) {
       ok(x === y, msg)
     }
 
-    viewer.on('zoom', function (ev) {
+    function testZoomUpdatesButtons(ev) {
       equal(zoomInButton.disabled, !ev.data.canZoomIn, '(HINT) disable the zoom-in button when the viewer can not zoom in any further')
       equal(zoomOutButton.disabled, !ev.data.canZoomOut, '(HINT) disable the zoom-in button when the viewer can not zoom in any further')
-    })
+    }
 
-    viewer.on('pagefocus', function (ev) {
+    function testPagefocusUpdatesButtons(ev) {
       if (ev.data.page === 1) {
         ok(prevBtn.disabled, '(HINT) disable the previous button when the current page is 1')
       } else {
@@ -86,7 +100,11 @@ function test(done) {
       } else {
         ok(!nextBtn.disabled, '(HINT) enable the next button when the current page is lower than `numPages`')
       }
-    })
+    }
+
+    viewer.on('zoom', testZoomUpdatesButtons)
+
+    viewer.on('pagefocus', testPagefocusUpdatesButtons)
 
     viewer.zoom(Crocodoc.ZOOM_FIT_HEIGHT)
     viewer.scrollTo(1)
@@ -96,6 +114,27 @@ function test(done) {
     viewer.zoom(Infinity)
 
     reset()
+
+    zoomInButton.click()
+    equal(zoom.calledWith[0], 'in', '(HINT) the zoom-in button should zoom in the viewer when clicked')
+
+    reset()
+
+    zoomOutButton.click()
+    equal(zoom.calledWith[0], 'out', '(HINT) the zoom-out button should zoom out the viewer when clicked')
+
+    reset()
+
+    nextBtn.click()
+    equal(scrollTo.calledWith[0], 'next', '(HINT) the next button should scroll to the next page when clicked')
+
+    reset()
+
+    prevBtn.click()
+    equal(scrollTo.calledWith[0], 'previous', '(HINT) the previous button should scroll to the previous page when clicked')
+
+    reset()
+
     done(null, true)
   }
 
