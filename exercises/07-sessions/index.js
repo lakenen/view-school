@@ -20,7 +20,7 @@ module.exports = {
   , files: files
   , test: test
   , setup: setup
-  , testTimeout: 30000 // 30s because of retry-after
+  , testTimeout: 60000 // 60s because of retry-after
   , next: require('../next-exercise')(exName)
 }
 
