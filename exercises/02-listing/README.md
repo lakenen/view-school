@@ -25,4 +25,4 @@ Put your solution in `list.js` in [this project's directory](/open/02-listing).
 ## Resources
 
 * [/documents GET](http://developers.box.com/view/#get-documents) View API documentation
-* [documents.list](https://www.npmjs.org/package/box-view#list) `box-view` documentation
+* [documents.list](https://github.com/lakenen/node-box-view/blob/master/README.md#list) `box-view` documentation

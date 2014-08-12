@@ -19,7 +19,7 @@ Aside from specifying a file rather than a URL, the `uploadFile` method behaves 
 Example:
 ```js
 function response(err, doc) {
-  // ...
+  // `doc` is the JSON-parsed response body
 }
 
 // by filename
@@ -44,4 +44,4 @@ The multipart upload endpoint **uses a different base URL than the other API end
 ## Resources
 
 * [/documents POST](https://developers.box.com/view/#post-documents) View API documentation
-* [documents.uploadFile](https://www.npmjs.org/package/box-view#uploadfile) `box-view` documentation
+* [documents.uploadFile](https://github.com/lakenen/node-box-view/blob/master/README.md#uploadfile) `box-view` documentation

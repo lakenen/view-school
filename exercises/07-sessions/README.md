@@ -46,7 +46,7 @@ var options = {
   retry: true // auto-retry the request if necessry
 };
 function response(err, session, response) {
-  // ...
+  // `session` is the JSON-parsed response body
 };
 client.sessions.create(docId, options, response);
 ```
@@ -71,5 +71,5 @@ You can specify the dark theme by appending `?theme=dark` to the session `view` 
 ## Resources
 
 * [/sessions POST](https://developers.box.com/view/#post-sessions) View API documentation
-* [sessions.create](https://www.npmjs.org/package/box-view#create) `box-view` documentation
+* [sessions.create](https://github.com/lakenen/node-box-view/blob/master/README.md#create) `box-view` documentation
 * [iframe viewer](https://developers.box.com/view/#view-a-document) documentation

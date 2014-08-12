@@ -32,4 +32,4 @@ client.documents.getThumbnail(docId, width, height, function (err, res) {
 ## Resources
 
 * [/documents/{id}/thumbnail GET](https://developers.box.com/view/#get-documents-id-thumbnail) View API documentation
-* [documents.getThumbnail](https://www.npmjs.org/package/box-view#getthumbnail) `box-view` documentation
+* [documents.getThumbnail](https://github.com/lakenen/node-box-view/blob/master/README.md#getthumbnail) `box-view` documentation

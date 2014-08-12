@@ -15,6 +15,6 @@ Put your solution in `update-latest.js` in [this project's directory](/open/03-u
 ## Resources
 
 * [/documents GET](http://developers.box.com/view/#get-documents) View API documentation
-* [documents.list](https://www.npmjs.org/package/box-view#list) `box-view` documentation
+* [documents.list](https://github.com/lakenen/node-box-view/blob/master/README.md#list) `box-view` documentation
 * [/documents PUT](http://developers.box.com/view/#put-documents-id) View API documentation
-* [documents.update](https://www.npmjs.org/package/box-view#update) `box-view` documentation
+* [documents.update](https://github.com/lakenen/node-box-view/blob/master/README.md#update) `box-view` documentation

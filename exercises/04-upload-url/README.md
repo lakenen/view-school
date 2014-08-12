@@ -30,7 +30,7 @@ var options = {
 };
 var url = 'http://example.com/file.pdf';
 client.documents.uploadURL(url, options, function (err, doc) {
-  // ...
+  // `doc` is the JSON-parsed response body
 });
 ```
 
@@ -39,4 +39,4 @@ See the documentation links below for more information.
 ## Resources
 
 * [/documents POST](https://developers.box.com/view/#post-documents) View API documentation
-* [documents.uploadURL](https://www.npmjs.org/package/box-view#uploadurl) `box-view` documentation
+* [documents.uploadURL](https://github.com/lakenen/node-box-view/blob/master/README.md#uploadurl) `box-view` documentation
