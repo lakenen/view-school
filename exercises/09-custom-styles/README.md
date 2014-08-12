@@ -47,7 +47,7 @@ Change the color of the viewport:
 
 ## Loading Indicators
 
-When a page is loading in viewer.js, it will have the `.crocodoc-page-loading` class. This allows you to apply loading-specific styles, like a loading indicator or animation to your pages. In this exercise, the page loading has been artificially slowed down so you can more easily see your loading indicator.
+When a page is loading in viewer.js, it will have the `.crocodoc-page-loading` class. This allows you to apply loading-specific styles, like a loading indicator or animation to your pages. **In this exercise, the page loading has been artificially slowed down so you can more easily see your loading indicator.**
 
 Example:
 ```css

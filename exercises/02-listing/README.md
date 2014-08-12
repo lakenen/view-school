@@ -20,7 +20,7 @@ var client = require('box-view').createClient('mytoken');
 
 Using the `box-view` module, write a function that accepts a callback function as an argument. When called, your module should request a list of your uploaded documents from the View API and call the callback function with the response object.
 
-Put your solution in `list.js` in [this project's directory](/open/02-node-box-view).
+Put your solution in `list.js` in [this project's directory](/open/02-listing).
 
 ## Resources
 

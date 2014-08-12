@@ -10,7 +10,7 @@
 
 Awesome!!!
 
-It's pretty easy to build your own controls for a viewer with the provided methods and events, but you can probably imagine a lot of other things you can do with the events a viewer.js instance emits!
+It's pretty easy to build your own controls for a viewer with the provided methods and events, but you can probably imagine a lot of other things you can do with the events a viewer.js instance emits.
 
 In the next exercise, we'll build a cool presentation-style viewer!
 

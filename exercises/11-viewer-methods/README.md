@@ -16,8 +16,8 @@ In this exercise, you'll write a javascript module `viewer-methods`:
   + `.prev-btn` - on click, the viewer should scroll to the previous page
   + `.next-btn` - on click, the viewer should scroll to the next page
 - your function should also bind events on the viewer:
-  + `zoom` - enable / disable the zoom buttons as appropriate (i.e., if you can't zoom in anymore, disable the zoom in button)
-  + `pagefocus` - enable / disable the previous / next buttons as appropriate (i.e., if you are on page 1, disable the previous button)
+  + `zoom` - enable / disable the zoom buttons as appropriate (e.g., if you can't zoom in anymore, disable the zoom in button)
+  + `pagefocus` - enable / disable the previous / next buttons as appropriate (e.g., if you are on page 1, disable the previous button)
 
 Put your javascript solution in `simple-controls.js` in [this project's directory](/open/11-viewer-methods).
 

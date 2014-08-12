@@ -1,6 +1,6 @@
 # Lesson Seven: Creating a Viewing Session
 
-Great work so far! At this point you're probably wondering _when will I get to see the converted documents?!_ You've completed five lessons so far and have yet to experience what the API is really good for... so let's get to it!
+Great work so far! At this point you're probably wondering _when will I get to see the converted documents?!_ You've completed six lessons so far and have yet to experience what the API is really good for... so let's get to it!
 
 ## Creating Sessions
 
@@ -10,10 +10,9 @@ When you upload a file for conversion, it goes into a queue for processing. Whil
 
 In the View API, a `202` response will be accompanied by a `'Retry-After'` header, which specifies the time in seconds to wait before retrying your request.
 
-While this approach is better than simply polling the `/documents/{id}` endpoint, there's actually an even better way: [web hooks](https://developers.box.com/view-webhooks/). Unfortunately, there's not an easy way to try out web hooks for this workshop, but please check them out if you plan to use the View API in production!
-
 The `box-view` node package has the ability to auto-retry requests when the response contains the `Retry-After` header, so we'll use that functionality for this exercise.
 
+*NOTE: While the "retry-after" approach is better than simply polling the `/documents/{id}` endpoint until the document is "done", there's actually an even better way: [web hooks](https://developers.box.com/view-webhooks/). Unfortunately, there's not an easy way to try out web hooks for this workshop, but please check them out if you plan to use the View API in production!*
 
 ## Your Task
 
@@ -22,7 +21,7 @@ In this exercise, you'll write a node module `upload-and-view`:
 - When called, the function should upload the URL to the View API, create a viewing session for the resulting document, then call the callback function with the session's `view` URL.
 - The session should be created with a duration of 30 minutes and text selection disabled.
 
-Put your solution in `upload-and-view.js` in [this project's directory](/open/06-sessions).
+Put your solution in `upload-and-view.js` in [this project's directory](/open/07-sessions).
 
 
 ## sessions.create

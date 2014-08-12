@@ -9,7 +9,7 @@ var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
 // extrasolar.pdf
-var url = 'https://view-api.box.com/1/sessions/91630aad821b47d8822bd7f1f360c5d0/assets/'
+var url = 'https://view-api.box.com/1/sessions/e2edd7aa94fe460d9d61f649bad94c45/assets/'
   , currentViewer
 
 module.exports = {

@@ -2,7 +2,7 @@
 
 Using the `iframe` viewer is a great way to get up and running with the View API in no time. However, if you want to really customize and deeply integrate documents into your application, then you'll probably want to use viewer.js.
 
-Viewer.js is a small client-side library for rendering and interacting with View API documents which provides incredible flexibility in building applications around documents. In this exercise, we'll see how easy it is to view a document with viewer.js.
+Viewer.js is a small client-side library for rendering and interacting with View API documents. In this exercise, we'll see how easy it is to view a document with viewer.js.
 
 
 ## Your Task

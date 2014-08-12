@@ -52,10 +52,8 @@ function test(done) {
   }
 
   function testButtons(numPages) {
-    var initZoom
-
     function reset() {
-      viewer.zoom(initZoom)
+      viewer.zoom(Crocodoc.ZOOM_AUTO)
       viewer.scrollTo(1)
     }
 
@@ -73,9 +71,6 @@ function test(done) {
     }
 
     viewer.on('zoom', function (ev) {
-      if (!initZoom) {
-        initZoom = ev.data.zoom
-      }
       equal(zoomInButton.disabled, !ev.data.canZoomIn, '(HINT) disable the zoom-in button when the viewer can not zoom in any further')
       equal(zoomOutButton.disabled, !ev.data.canZoomOut, '(HINT) disable the zoom-in button when the viewer can not zoom in any further')
     })
