@@ -69,7 +69,8 @@ body {
   background: #fff;
 }
 
-.exercise__09-custom-styles .sidebar blockquote {
+.exercise__09-custom-styles .sidebar blockquote,
+.exercise__11-viewer-methods .sidebar blockquote {
   text-align: center;
   white-space: pre-wrap;
 }
@@ -80,5 +81,56 @@ body {
 
 .exercise__10-viewer-configs .viewer {
   height: 100%;
+  background: rgb(12, 14, 29);
+}
+.exercise__10-viewer-configs .crocodoc-page {
+  padding: 0;
+}
+.exercise__10-viewer-configs .crocodoc-page-content {
+  background: transparent;
+}
+
+.exercise__11-viewer-methods .viewer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 52px;
+  background: #F2F2F2;
+}
+.exercise__11-viewer-methods .display .controls {
+  position: absolute;
+  bottom: 0;
+  height: 52px;
+  width: 100%;
   background: #fff;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 54px;
+  border-top: 1px solid #D9D9D9;
+}
+.exercise__11-viewer-methods .display .controls .button {
+  background-color: #DEDEDE;
+  border-color: #DEDEDE;
+  color: #999;
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+  padding: 0;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.exercise__11-viewer-methods .display .controls .button:hover,
+.exercise__11-viewer-methods .display .controls .button:focus {
+  border-color: #cbcbcb;
+}
+
+.exercise__11-viewer-methods .display .controls .button:active {
+  background-color: #cbcbcb;
+}
+
+.exercise__11-viewer-methods .display .controls .button[disabled] {
+  background-color: #F3F3F3;
+  border-color: #F3F3F3;
+  color: #ddd;
 }

@@ -8,7 +8,8 @@ var indexHTML = fs.readFileSync(__dirname + '/index.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 
-var url = 'https://view-api.box.com/1/sessions/b1d79d7b69a24c8a97cda45bfff07138/assets'
+// extrasolar.pdf
+var url = 'https://view-api.box.com/1/sessions/91630aad821b47d8822bd7f1f360c5d0/assets/'
   , currentViewer
 
 module.exports = {

@@ -8,7 +8,7 @@
 -------------------------- ===================== --------------------------
 ```
 
-That's it for now! I'm working on writing more viewer.js exercises, so check back soon!
+You can do a lot with CSS when customizing viewer.js. In a later exercise, we'll look at cool ways to use CSS to add transition effects to presentations! For now, let's move on to some viewer config...
 
 ```
 -------------------------- ===================== --------------------------
