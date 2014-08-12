@@ -7,7 +7,7 @@ In the last couple exercises, we just used the default viewer.js config when cre
 In this exercise, you'll write a javascript module `draggy-viewer`:
 - export a function that takes two arguments: an Element and string URL
 - create, `load()`,  and return a viewer instance with the following configuration:
-  + enable text selection
+  + disable text selection
   + enable click + drag
   + set initial zoom to fit the document to the height of the viewport
   + use "horizontal" layout
