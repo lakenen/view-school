@@ -30,31 +30,34 @@ function test(done) {
   boxViewMock.restore()
   boxViewMock.mock({
     documents: {
-      uploadURL: function (url, opt, cb) {
-        if (url !== DOC_URL) {
-          done('(HINT) use the provided URL!')
+        uploadFile: function () {
+          done('(HINT) you used `uploadFile` -- you should use `uploadURL` for this exercise!')
         }
-        if (typeof opt === 'function' || !opt.params) {
-          done('(HINT) you\'ll need to specify some `params` with the upload request')
-        }
-
-        if (!opt.params.name) {
-          done('(HINT) don\'t forget to specify a name')
-        }
-        var r = this.__.uploadURL(url, opt, function (err, res) {
-          if (err) {
-            done('Looks like an API error... check the response for details')
+      , uploadURL: function (url, opt, cb) {
+          if (url !== DOC_URL) {
+            done('(HINT) use the provided URL!')
           }
-          // set a timeout so that the response prints before "PASSED!"
-          setTimeout(function () {
-            cb(err, res)
-          }, 50)
-        })
-        r.on('response', function (res) {
-          res.pipe(printResponse())
-        })
-        return r
-      }
+          if (typeof opt === 'function' || !opt.params) {
+            done('(HINT) you\'ll need to specify some `params` with the upload request')
+          }
+
+          if (!opt.params.name) {
+            done('(HINT) don\'t forget to specify a name')
+          }
+          var r = this.__.uploadURL(url, opt, function (err, res) {
+            if (err) {
+              done('Looks like an API error... check the response for details')
+            }
+            // set a timeout so that the response prints before "PASSED!"
+            setTimeout(function () {
+              cb(err, res)
+            }, 50)
+          })
+          r.on('response', function (res) {
+            res.pipe(printResponse())
+          })
+          return r
+        }
     }
   })
 
