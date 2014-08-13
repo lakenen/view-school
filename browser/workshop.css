@@ -90,6 +90,10 @@ body {
   background: transparent;
 }
 
+.exercise__11-viewer-methods .display {
+  min-height: 400px !important;
+}
+
 .exercise__11-viewer-methods .viewer {
   position: absolute;
   top: 0;

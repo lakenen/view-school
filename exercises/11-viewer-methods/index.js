@@ -85,8 +85,16 @@ function test(done) {
     }
 
     function testZoomUpdatesButtons(ev) {
-      equal(zoomInButton.disabled, !ev.data.canZoomIn, '(HINT) disable the zoom-in button when the viewer can not zoom in any further')
-      equal(zoomOutButton.disabled, !ev.data.canZoomOut, '(HINT) disable the zoom-in button when the viewer can not zoom in any further')
+      if (ev.data.canZoomOut) {
+        ok(!zoomOutButton.disabled, '(HINT) enable the zoom-out button when the viewer can zoom out')
+      } else {
+        ok(zoomOutButton.disabled, '(HINT) disable the zoom-out button when the viewer can not zoom out any further')
+      }
+      if (ev.data.canZoomIn) {
+        ok(!zoomInButton.disabled, '(HINT) enable the zoom-in button when the viewer can zoom in')
+      } else {
+        ok(zoomInButton.disabled, '(HINT) disable the zoom-in button when the viewer can not zoom in any further')
+      }
     }
 
     function testPagefocusUpdatesButtons(ev) {
@@ -102,15 +110,15 @@ function test(done) {
       }
     }
 
-    viewer.on('zoom', testZoomUpdatesButtons)
 
-    viewer.on('pagefocus', testPagefocusUpdatesButtons)
 
     viewer.zoom(Crocodoc.ZOOM_FIT_HEIGHT)
+    viewer.on('pagefocus', testPagefocusUpdatesButtons)
     viewer.scrollTo(1)
     viewer.scrollTo(numPages)
 
-    viewer.zoom(0)
+    viewer.on('zoom', testZoomUpdatesButtons)
+    viewer.zoom(0.01)
     viewer.zoom(Infinity)
 
     reset()
