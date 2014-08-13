@@ -23,17 +23,17 @@ Put your solution in `custom-styles.css` in [this project's directory](/open/09-
 
 You can apply custom styles to viewer.js pages very easily! Keep reading for some examples...
 
-Add a red outline to each page:
-```css
-.crocodoc-page-content {
-  outline: 1px solid red;
-}
-```
-
 Add some more spacing between pages (this is most easily done with padding):
 ```css
 .crocodoc-page {
   padding: 20px 100px;
+}
+```
+
+Add a red outline to each page:
+```css
+.crocodoc-page-content {
+  outline: 1px solid red;
 }
 ```
 
@@ -58,6 +58,16 @@ Example:
 }
 ```
 
+
+## box-shadow
+
+Here's an example of how to make a `box-shadow` in CSS.
+
+```css
+.crocodoc-page-content {
+  box-shadow: 1px 1px 5px red;
+}
+```
 
 ## Resources
 
