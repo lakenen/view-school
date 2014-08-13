@@ -4,6 +4,7 @@ var Crocodoc,
   createViewer
 
 module.exports.mock = function (mocks) {
+  mocks = mocks || {}
   Crocodoc = window.Crocodoc
   createViewer = Crocodoc.createViewer
 
