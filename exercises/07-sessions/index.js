@@ -33,12 +33,14 @@ function test(done) {
   var boxViewMock = require('../mock-box-view')
   var viewerEl = document.querySelector('.viewer-container')
 
+  var uploadCalled = false
   boxViewMock.restore()
   var mock = boxViewMock.mock({
       documents: {
         uploadURL: function (url, opt, cb) {
+          uploadCalled = true
           if (url !== DOC_URL) {
-            // done('(HINT) use the provided URL!')
+            done('(HINT) use the provided URL!')
           }
           if (typeof opt === 'function') {
             retry = cb
@@ -59,6 +61,9 @@ function test(done) {
       }
     , sessions: {
         create: function (id, opt, cb) {
+          if (!uploadCalled) {
+            done('(HINT) upload the document before creating a session!')
+          }
           if (typeof opt === 'function') {
             retry = cb
             cb = opt
@@ -108,7 +113,7 @@ function test(done) {
 
   var view = requireSolution('upload-and-view')
   view(DOC_URL, function (viewURL) {
-    if (viewURL) {
+    if (typeof viewURL === 'string') {
       viewerEl.src = viewURL
       done(null, true)
     } else {
