@@ -1,2 +1,1 @@
-// enter your token here
-module.exports = 'mytoken';
+module.exports = 'your box view api token here';

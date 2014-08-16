@@ -7,6 +7,9 @@ module.exports.mock = function (mocks) {
   bv = require(boxview)
   createClient = bv.createClient
   bv.createClient = function (token) {
+    if (token === 'your api token') {
+      throw new Error('(HINT) remember to replace "your api token" with your Box View token!')
+    }
     var client = createClient(token)
       , mock = extend(true, {}, client, mocks)
     mock.documents.__ = client.documents
