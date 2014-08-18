@@ -61,7 +61,7 @@ function test(done) {
     }
   })
   if (!fileToUpload) {
-    done('(HINT) drop a file first (we left a sample in <a target="_blank" href="/open/'+exName+'">the lesson directory</a>)!')
+    done('(HINT) drag and drop a file into the dashed box first (we left a sample in <a target="_blank" href="/open/'+exName+'">the lesson directory</a>)!')
   }
 
   var upload = requireSolution('upload-file')
