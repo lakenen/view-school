@@ -8,11 +8,12 @@ Viewer.js is a small client-side library for rendering and interacting with View
 ## Your Task
 
 In this exercise, you'll write a javascript module `view-document`:
-- export a function that takes two arguments: an Element and string URL
+- export a function that takes two arguments: an Element and string **session assets** URL
 - when called, the function should create a viewer instance with the given element and asset URL, then `load()` the document and return the viewer instance
 
 Put your javascript solution in `view-document.js` in [this project's directory](/open/08-viewer-js). The CSS will go in `styles.css`.
 
+_**NOTE**: in this exercise, the session has already been created for you, so you don't have to upload a document and create a viewing session._
 
 ## Viewer.js
 
@@ -28,7 +29,7 @@ viewer.load();
 
 Calling `load()` will load some metadata and styles required for the whole document immediately, but the viewer will continue to load pages for long documents on a lazy basis as necessary (i.e., as the user scrolls or pages through a document).
 
-**NOTE**: viewer.js does not enforce or set a specific width or height on its containing element. Because of the way elements are positioned inside the viewer, by default, the container will end up with a height of 0 if it's not explicitly set. To get around this, you can just make sure to set a height on the containing element:
+_**NOTE**: viewer.js does not enforce or set a specific width or height on its containing element. Because of the way elements are positioned inside the viewer, by default, the container will end up with a height of 0 if it's not explicitly set. To get around this, you can just make sure to set a height on the containing element:_
 ```css
 .my-viewer {
   /* when using a percentage, remember to set a height on the parent element as well! */
