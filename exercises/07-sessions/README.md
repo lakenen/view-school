@@ -4,11 +4,7 @@ Great work so far! At this point you're probably wondering _when will I get to s
 
 ## Creating Sessions
 
-When you upload a file for conversion, it goes into a queue for processing. While the View API is very fast, the document will not be instantly ready for viewing, so you can't create a session immediately following an upload. Sessions can be created as soon as the document is `viewable`. This means that the necessary assets have been generated to view *at least* the first page of the document. As such, if your try to create a session immediately after uploading a document, it's likely not going to be viewable yet. In this case, the API will respond with `202 Accepted`, which means basically:
-
-> "We've acknowledged your request, but it's still processing... check back later."
-
-In the View API, a `202` response will be accompanied by a `'Retry-After'` header, which specifies the time in seconds to wait before retrying your request.
+When you upload a file for conversion, it goes into a queue for processing. While the View API is very fast, the document will not be instantly ready for viewing, so you can't create a session immediately following an upload. Sessions can be created as soon as the document is `viewable`. This means that the necessary assets have been generated to view *at least* the first page of the document. As such, if your try to create a session immediately after uploading a document, it's likely not going to be viewable yet. In this case, the API will respond with `202 Accepted`, just like the thumbnail exercise before this.
 
 The `box-view` node package has the ability to auto-retry requests when the response contains the `Retry-After` header, so we'll use that functionality for this exercise.
 
