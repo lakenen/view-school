@@ -2,7 +2,7 @@ var extend = require('extend')
 
 var bv, createClient
 
-module.exports.mock = function (mocks) {
+module.exports.mock = function (mocks, creator) {
   var boxview = 'box-view'
   bv = require(boxview)
   createClient = bv.createClient
@@ -12,9 +12,14 @@ module.exports.mock = function (mocks) {
     }
     var client = createClient(token)
       , mock = extend(true, {}, client, mocks)
+
     mock.documents.__ = client.documents
     mock.sessions.__ = client.sessions
-    return mock
+    client.token = token
+    mock.documents.__client = client
+    mock.sessions.__client = client
+
+    return creator(mock, token)
   }
 }
 
