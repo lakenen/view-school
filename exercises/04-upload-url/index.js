@@ -7,7 +7,9 @@ var unusedHTML = fs.readFileSync(__dirname + '/../unused.html', 'utf8')
 var files = fs.readdirSync(__dirname + '/files')
 var exName = path.basename(__dirname)
 var exEl = document.querySelector('.display')
-var DOC_URL = 'https://view-api.box.com/1/sessions/2dfb390dd1d84a11925cf44e9f2d5794/content'
+
+// congratulations/viewer.js
+var DOC_URL = 'https://github.com/lakenen/view-school-assets/raw/master/1.pdf'
 
 module.exports = {
     dirname: exName
