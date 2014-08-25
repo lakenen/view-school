@@ -1,5 +1,7 @@
 var client = require('box-view').createClient('your api token');
 
-module.exports = function (callback) {
+function getThumbnail(docId, width, height, callback) {
   // your code here
-};
+}
+
+module.exports = getThumbnail;
