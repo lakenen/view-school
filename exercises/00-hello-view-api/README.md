@@ -12,4 +12,4 @@ In this lesson, we'll get you setup with a brand new Box View API account.
 2. Once you're logged in, create a new Box application
 3. Enter a name, select "Box View", and click "Create Application"
 4. Click "Configure Your Application"
-5. The "client_id" field is your View API token! Paste that token into `token.js` in [this project's directory](/open/00-hello-view-api).
+5. Copy the "View Api Key" and paste it into the correct place in `token.js` in [this project's directory](/open/00-hello-view-api).
