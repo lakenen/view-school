@@ -15,7 +15,7 @@
     "envify": "^2.0.1",
     "escape-html": "^1.0.1",
     "extend": "^1.3.0",
-    "format-response": "^0.4.1",
+    "format-response": "^0.4.2",
     "http-browserify": "https://github.com/lakenen/http-browserify/tarball/view-school",
     "hyperquest": "^0.3.0",
     "insert-css": "^0.2.0",
