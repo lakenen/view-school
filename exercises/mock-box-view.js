@@ -19,6 +19,9 @@ module.exports.mock = function (mocks, creator) {
     mock.documents.__client = client
     mock.sessions.__client = client
 
+    if (!creator) {
+      return mock
+    }
     return creator(mock, token)
   }
 }
