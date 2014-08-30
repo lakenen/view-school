@@ -17,11 +17,3 @@ In the next exercise, we'll build a cool presentation-style viewer!
 ```
 -------------------------- ===================== --------------------------
 ```
-
-# JK - THAT'S ALL FOR NOW!
-
-I'm still working on more viewer.js exercises, so check back soon if you're interested!
-
-```
--------------------------- ===================== --------------------------
-```
