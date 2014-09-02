@@ -48,7 +48,7 @@ viewer.on('pagefocus', function (event) {
 
 viewer.on('zoom', function (event) {
   if (!event.data.canZoomIn) {
-    // disable an imaginary button
+    // disable the "zoom in" button
     zoomInButton.disabled = true;
   }
 });
