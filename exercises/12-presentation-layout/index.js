@@ -80,10 +80,16 @@ function test(done) {
   })
 
   prevBtn.addEventListener('click', function () {
-    viewer.scrollTo(Crocodoc.SCROLL_PREVIOUS);
+    viewer.scrollTo(Crocodoc.SCROLL_PREVIOUS)
   })
   nextBtn.addEventListener('click', function () {
-    viewer.scrollTo(Crocodoc.SCROLL_NEXT);
+    viewer.scrollTo(Crocodoc.SCROLL_NEXT)
+  })
+
+  window.addEventListener('keydown', handleKeydown)
+
+  viewer.on('destroy', function () {
+    window.removeEventListener('keydown', handleKeydown)
   })
 
   viewer.on('fail', function () {
@@ -93,6 +99,17 @@ function test(done) {
   function testTransitions() {
     // just pass it, I guess ¯\_(ツ)_/¯
     done(null, true)
+  }
+
+  function handleKeydown(ev) {
+    if (viewer) {
+      if (ev.keyCode === 37) {
+        viewer.scrollTo(Crocodoc.SCROLL_PREVIOUS)
+      }
+      if (ev.keyCode === 39) {
+        viewer.scrollTo(Crocodoc.SCROLL_NEXT)
+      }
+    }
   }
 }
 
