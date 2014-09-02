@@ -1,5 +1,6 @@
 var path = require('path')
 var viewerMock = require('../mock-viewer')
+var loadCSS = require('../load-css')
 
 var fs = require('fs')
 var readme = fs.readFileSync(__dirname + '/README.md', 'utf8')
@@ -20,6 +21,7 @@ module.exports = {
   , test: test
   , setup: setup
   , next: require('../next-exercise')(exName)
+  , update: update
 }
 
 function requireSolution(name, ext) {
@@ -27,20 +29,34 @@ function requireSolution(name, ext) {
   return require(name + '.' + (ext || 'js'))
 }
 
+function update() {
+  loadCSS('transitions.css')
+  if (currentViewer) {
+    currentViewer.updateLayout()
+  }
+}
+
 function test(done) {
+  update()
+
   if (currentViewer) {
     currentViewer.destroy()
   }
 
+  // do this here so we don't have to worry about unregistering event handlers
+  var exEl = document.querySelector('.display')
+  exEl.innerHTML = indexHTML
+
   viewerMock.restore()
   viewerMock.mock()
 
-  var view = requireSolution('simple-controls')
+  var view = requireSolution('presentation-viewer')
     , el = document.querySelector('.viewer')
     , viewer = view(el, url)
-
-  var prevBtn = document.querySelector('.prev-btn')
+    , prevBtn = document.querySelector('.prev-btn')
     , nextBtn = document.querySelector('.next-btn')
+    , numPages
+    , config
 
   currentViewer = viewer
 
@@ -48,13 +64,26 @@ function test(done) {
     done('(HINT) your function should return a viewer instance')
   }
 
-  var config = viewer.getConfig()
+  config = viewer.getConfig()
   if (config.layout !== window.Crocodoc.LAYOUT_PRESENTATION) {
     done('(HINT) remember to set the correct layout!')
   }
 
   viewer.on('ready', function (ev) {
-    setTimeout(testButtons.bind(null, ev.data.numPages))
+    numPages = ev.data.numPages
+    // setTimeout(testTransitions)
+  })
+
+  viewer.on('pagefocus', function (ev) {
+    prevBtn.disabled = ev.data.page === 1
+    nextBtn.disabled = ev.data.page === numPages
+  })
+
+  prevBtn.addEventListener('click', function () {
+    viewer.scrollTo(Crocodoc.SCROLL_PREVIOUS);
+  })
+  nextBtn.addEventListener('click', function () {
+    viewer.scrollTo(Crocodoc.SCROLL_NEXT);
   })
 
   viewer.on('fail', function () {
@@ -63,8 +92,6 @@ function test(done) {
 }
 
 function setup(done) {
-  var exEl = document.querySelector('.display')
-  exEl.innerHTML = indexHTML
   require('../viewer')
   done()
 }

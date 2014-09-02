@@ -138,3 +138,42 @@ body {
   border-color: #F3F3F3;
   color: #ddd;
 }
+
+.exercise__12-presentation-layout .display {
+  background-color: #222;
+}
+.exercise__12-presentation-layout .viewer {
+  height: 100%;
+}
+
+.exercise__12-presentation-layout .display .controls .button {
+  background-color: transparent;
+  color: #666;
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+  padding: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 0;
+  position: absolute;
+}
+.exercise__12-presentation-layout .display .controls .prev-btn {
+  top: 50%;
+  margin-top: -20px;
+  left: 1em;
+}
+.exercise__12-presentation-layout .display .controls .next-btn {
+  top: 50%;
+  margin-top: -20px;
+  right: 1em;
+}
+.exercise__12-presentation-layout .display .controls .button:hover,
+.exercise__12-presentation-layout .display .controls .button:focus {
+  font-weight: bold;
+  color: #999;
+}
+
+.exercise__12-presentation-layout .display .controls .button[disabled] {
+  display: none;
+}

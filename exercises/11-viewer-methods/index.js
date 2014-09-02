@@ -32,6 +32,10 @@ function test(done) {
     currentViewer.destroy()
   }
 
+  // do this here so we don't have to worry about unregistering event handlers
+  var exEl = document.querySelector('.display')
+  exEl.innerHTML = indexHTML
+
   var scrollTo = function () {
     scrollTo.calledWith = arguments
     this._scrollTo.apply(this, arguments)
@@ -156,8 +160,6 @@ function test(done) {
 }
 
 function setup(done) {
-  var exEl = document.querySelector('.display')
-  exEl.innerHTML = indexHTML
   require('../viewer')
   done()
 }
