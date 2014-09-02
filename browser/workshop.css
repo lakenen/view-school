@@ -146,12 +146,17 @@ body {
   height: 100%;
 }
 
+.exercise__12-presentation-layout .crocodoc-page {
+  padding-left: 5em;
+  padding-right: 5em;
+}
+
 .exercise__12-presentation-layout .display .controls .button {
   background-color: transparent;
   color: #666;
-  width: 40px;
-  height: 40px;
-  font-size: 14px;
+  width: 2em;
+  height: 2em;
+  font-size: 2em;
   padding: 0;
   min-width: 0;
   box-sizing: border-box;
@@ -160,13 +165,13 @@ body {
 }
 .exercise__12-presentation-layout .display .controls .prev-btn {
   top: 50%;
-  margin-top: -20px;
-  left: 1em;
+  margin-top: -1em;
+  left: 0;
 }
 .exercise__12-presentation-layout .display .controls .next-btn {
   top: 50%;
-  margin-top: -20px;
-  right: 1em;
+  margin-top: -1em;
+  right: 0;
 }
 .exercise__12-presentation-layout .display .controls .button:hover,
 .exercise__12-presentation-layout .display .controls .button:focus {
@@ -176,4 +181,9 @@ body {
 
 .exercise__12-presentation-layout .display .controls .button[disabled] {
   display: none;
+}
+
+.exercise__11-viewer-methods .crocodoc-page-loading .crocodoc-page-content,
+.exercise__12-presentation-layout .crocodoc-page-loading .crocodoc-page-content {
+  background: #fff url(https://raw.githubusercontent.com/lakenen/view-school-assets/master/spinner.gif) center center no-repeat;
 }

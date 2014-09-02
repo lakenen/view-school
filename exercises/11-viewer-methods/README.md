@@ -10,7 +10,7 @@ The viewer.js instance comes with a bunch of nifty methods and events that you c
 
 In this exercise, you'll write a javascript module `viewer-methods`:
 - export a function that takes two arguments: an Element and string URL
-- your function should create and `load()`, and return a viewer instance with the given element and url, then bind `click` events to the following elements:
+- your function should create, `load()`, and return a viewer instance with the given element and url, then bind `click` events to the following elements:
   + `.zoom-in-btn` - on click, the viewer should zoom in
   + `.zoom-out-btn` - on click, the viewer should zoom out
   + `.prev-btn` - on click, the viewer should scroll to the previous page
