@@ -25,7 +25,7 @@
     "portfinder": "^0.2.1",
     "remove-element": "0.0.0",
     "through2": "^0.5.1",
-    "viewer": "^0.6.0"
+    "viewer": "^0.7.0"
   },
   "devDependencies": {},
   "scripts": {
