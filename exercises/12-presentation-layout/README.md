@@ -19,47 +19,34 @@ You can use CSS to add really cool transitions to your viewer while using the pr
 Here's a simple example:
 
 ```css
-/*
-  NOTE: vendor prefixes have been
-  removed in this example, but are
-  still necessary in some browsers
-*/
+/* NOTE: vendor prefixes have been removed in this example, but are still
+necessary in some browsers */
 
-/* Make all pages visible and apply a
-transition on opacity and transform */
-.crocodoc-page {
+/* Make all pages visible and apply a transition on opacity and transform */
+/* NOTE: the full selector is necessary here in order to override the
+visibility property on `.crocodoc-layout-presentation .crocodoc-page` */
+.crocodoc-layout-presentation .crocodoc-page {
   transition: opacity 0.2s,
               transform 0.4s;
-  /* NOTE: !important is necessary here
-  because the CSS selector specificity
-  is lower than the default
-  `.crocodoc-layout-presentation .crocodoc-page`
-  styles */
-  visibility: visible !important;
-  opacity: 0;
+  visibility: visible;
 }
 
-.crocodoc-current-page {
-  /* Current page should be visible */
-  opacity: 1;
-}
-
-/* Transform 100% to the left and
-transparentize */
+/* Transform 100% to the left and transparentize */
 .crocodoc-page-before {
   transform: translateX(-100%);
   transition-delay: 0.2s, 0s;
+  opacity: 0;
 }
 
-/* Transform 100% to the right and
-transparentize */
+/* Transform 100% to the right and transparentize */
 .crocodoc-page-after {
   transform: translateX(100%);
   transition-delay: 0.2s, 0s;
+  opacity: 0;
 }
 ```
 
-The viewer.js repo contains several examples of custom presentation transitions, but the possibilities are endless! If you come up with a nifty transition that you'd like to share, please feel free to submit a pull request on Github.
+The viewer.js repo contains several examples of custom presentation transitions (see below for some links), but the possibilities are endless! If you come up with a nifty transition that you'd like to share, please feel free to submit a pull request on Github.
 
 ## Resources
 
