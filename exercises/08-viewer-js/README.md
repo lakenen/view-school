@@ -47,7 +47,7 @@ You might be wondering *what's with the `Crocodoc` namespace?* Crocodoc original
 
 `(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`
 
-You might also be wondering what the deal is with `module.exports` in this client-side code. This workshop is built using [browserify](http://browserify.org/), and writing modules with node's module syntax makes it much simpler to test the solutions!
+You might also be wondering what the deal is with `module.exports` in this browser code. This workshop is built using [browserify](http://browserify.org/), and writing modules with node's module syntax makes it much simpler to test the solutions!
 
 
 ## Resources
