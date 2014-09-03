@@ -184,7 +184,8 @@ body {
 }
 
 .exercise__11-viewer-methods .crocodoc-page-loading .crocodoc-page-content,
-.exercise__12-presentation-layout .crocodoc-page-loading .crocodoc-page-content {
+.exercise__12-presentation-layout .crocodoc-page-loading .crocodoc-page-content,
+.exercise__14-realtime-plugin .crocodoc-page-loading .crocodoc-page-content {
   background: #fff url(https://raw.githubusercontent.com/lakenen/view-school-assets/master/spinner.gif) center center no-repeat;
 }
 
@@ -242,4 +243,9 @@ body {
 .exercise__13-plugins .display .controls .button:hover,
 .exercise__13-plugins .display .controls .button:focus {
   opacity: 1;
+}
+
+.exercise__14-realtime-plugin .viewer {
+  height: 100%;
+  background: #F2F2F2;
 }
