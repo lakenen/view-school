@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "box-view-browser-bundle": "https://github.com/lakenen/box-view-browser-bundle/tarball/view-school",
-    "browser-workshopper": "^0.0.7",
+    "browser-workshopper": "^0.0.8",
     "byte-size": "^0.1.0",
     "concat-stream": "^1.4.6",
     "cssify": "^0.6.0",
