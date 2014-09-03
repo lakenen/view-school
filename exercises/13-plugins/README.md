@@ -40,3 +40,4 @@ viewer.load();
 
 * [viewer.js plugins](https://github.com/box/viewer.js#plugins) documentation
 * [fullscreen plugin](https://github.com/box/viewer.js/blob/master/plugins/fullscreen/README.md) documentation
+* [download plugin](https://github.com/box/viewer.js/blob/master/plugins/download/README.md) documentation
