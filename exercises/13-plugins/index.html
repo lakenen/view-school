@@ -5,3 +5,15 @@
     <button class="button download-btn" disabled>⤓</button>
   </div>
 </div>
+
+<svg height="0">
+  <mask id="fade-mask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+    <linearGradient id="fade-gradient" gradientUnits="objectBoundingBox" x2="0" y2="1">
+      <stop stop-color="white" stop-opacity="0" offset="0"></stop>
+      <stop stop-color="white" stop-opacity="1" offset="0.2"></stop>
+      <stop stop-color="white" stop-opacity="1" offset="0.8"></stop>
+      <stop stop-color="white" stop-opacity="0" offset="1"></stop>
+    </linearGradient>
+    <rect x="0" y="0" width="1" height="1" fill="url(#fade-gradient)"></rect>
+  </mask>
+</svg>

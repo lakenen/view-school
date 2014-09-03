@@ -29,6 +29,9 @@ function requireSolution(name, ext) {
 }
 
 function test(done) {
+  var exEl = document.querySelector('.display')
+  exEl.innerHTML = indexHTML
+
   if (currentViewer) {
     currentViewer.destroy()
   }
@@ -57,6 +60,9 @@ function test(done) {
   if (!config.plugins.fullscreen) {
     done('(HINT) remember to use the fullscreen plugin!')
   }
+  if ($(config.plugins.fullscreen.element).get(0) !== el.parentNode) {
+    done('(HINT) remember to use the viewer element\'s parent node as the fullscreen element!')
+  }
 
   if (!config.plugins.download) {
     done('(HINT) remember to use the download plugin!')
@@ -65,6 +71,7 @@ function test(done) {
   }
 
   viewer.on('ready', function () {
+    viewer.zoom('fitwidth')
     fullscreenBtn.disabled = downloadBtn.disabled = false
     setTimeout(testPlugins)
   })
@@ -129,8 +136,6 @@ function test(done) {
 }
 
 function setup(done) {
-  var exEl = document.querySelector('.display')
-  exEl.innerHTML = indexHTML
   require('../viewer')
 
   require('../../node_modules/viewer/plugins/fullscreen/fullscreen.css')

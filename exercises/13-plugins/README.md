@@ -7,7 +7,7 @@ Plugins are a very powerful way to add custom functionality to viewer instances.
 In this exercise, you'll write a javascript module `draggy-viewer`:
 - export a function that takes three arguments: an Element, a string viewURL, and a string downloadURL
 - create, `load()`,  and return a viewer instance with the following plugins:
-  + `fullscreen` - no configuration is necessary in this exercise (the defaults are fine)
+  + `fullscreen` - use the viewer element's parent container as the `element` option
   + `download` - use the URL provided to configure the download plugin
 - your solution should bind click handlers to the provided buttons
   + `.fullscreen-btn` - when clicked, it should toggle fullscreen mode

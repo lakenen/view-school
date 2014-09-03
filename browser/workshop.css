@@ -196,7 +196,27 @@ body {
 }
 .exercise__13-plugins .display .crocodoc-page {
   padding: 0;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,1) 20%,
+    rgba(0,0,0,1) 80%,
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,1) 20%,
+    rgba(0,0,0,1) 80%,
+    rgba(0,0,0,0) 100%
+  );
+  mask: url(#fade-mask);
 }
+.exercise__13-plugins .crocodoc-page-content {
+  background: transparent;
+}
+
+
 .exercise__13-plugins .display .crocodoc-viewer-logo {
   display: none;
 }
@@ -206,7 +226,7 @@ body {
   text-align: center;
 }
 .exercise__13-plugins .display .controls .button {
-  font-family: monospace;
+  font-family: Cambria; /* supports u+2922, req'd for ff */
   font-size: 2em;
   font-weight: bold;
   color: #fff;
