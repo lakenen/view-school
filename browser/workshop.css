@@ -238,7 +238,7 @@ body {
   min-width: 0;
 }
 .exercise__13-plugins .display .controls .button[disabled] {
-  /*display: none;*/
+  display: none;
 }
 .exercise__13-plugins .display .controls .button:hover,
 .exercise__13-plugins .display .controls .button:focus {
@@ -248,4 +248,30 @@ body {
 .exercise__14-realtime-plugin .viewer {
   height: 100%;
   background: #F2F2F2;
+}
+
+/* Converting Indicator */
+.exercise__14-realtime-plugin .conversion-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s, opacity 0.5s;
+  -webkit-transition-delay: 0.5s, 0s;
+  transition: visibility 0s, opacity 0.5s;
+  transition-delay: 0.5s, 0s;
+}
+.exercise__14-realtime-plugin.converting .conversion-progress {
+  opacity: 1;
+  visibility: visible;
+}
+.exercise__14-realtime-plugin .conversion-progress-bar {
+  height: 2px;
+  box-shadow: 0 0 3px #1a74ba;
+  background: #2a88d0;
+  width: 0;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
 }

@@ -5,7 +5,7 @@ Plugins are a very powerful way to add custom functionality to viewer instances.
 ## Your Task
 
 In this exercise, you'll write a javascript module `draggy-viewer`:
-- export a function that takes three arguments: an Element, a string viewURL, and a string downloadURL
+- export a function that takes three arguments: an Element, a string "assets" URL, and a string "download" URL
 - create, `load()`,  and return a viewer instance with the following plugins:
   + `fullscreen` - use the viewer element's parent container as the `element` option
   + `download` - use the URL provided to configure the download plugin

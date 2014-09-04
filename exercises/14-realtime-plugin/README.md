@@ -5,15 +5,11 @@ By default, viewer.js assumes that all pages are available when you load up a do
 ## Your Task
 
 In this exercise, you'll write a javascript module `streaming-viewer`:
-- export a function that takes three arguments: an Element, a string viewURL, and a string downloadURL
-- create, `load()`,  and return a viewer instance with the following plugins:
-  + `fullscreen` - no configuration is necessary in this exercise (the defaults are fine)
-  + `download` - use the URL provided to configure the download plugin
-- your solution should bind click handlers to the provided buttons
-  + `.fullscreen-btn` - when clicked, it should toggle fullscreen mode
-  + `.download-btn` - when clicked, it should download the original document
+- export a function that takes three arguments: an Element, a string "assets" URL, and a string "realtime" URL
+- create, `load()`,  and return a viewer instance with the realtime plugin configured to use the realtime URL provided
+- bind an event listener on the viewer that calls `updateConversionProgress` with a number from 0 to 100 that represents the progress of the conversion in percent (%)
 
-Put your javascript solution in `viewer-with-plugins.js` in [this project's directory](/open/14-realtime-plugin).
+Put your javascript solution in `streaming-viewer.js` in [this project's directory](/open/14-realtime-plugin).
 
 Don't worry about the CSS for this one; we've got you covered! Also, we'll include the realtime plugin source and its dependencies, though in your own apps you'd have to include those files alongside viewer.js.
 
