@@ -15,6 +15,7 @@ Don't worry about the CSS for this one; we've got you covered! Also, we'll inclu
 
 ## View API Realtime
 
+When you successfully create a session with the `/sessions` endpoint, the response will have a `urls` object with a `realtime` property. This is the URL that can be passed to the realtime plugin in viewer.js.
 
 
 ## Resources
