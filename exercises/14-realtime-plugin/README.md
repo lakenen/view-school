@@ -17,6 +17,18 @@ Don't worry about the CSS for this one; we've got you covered! Also, we'll inclu
 
 When you successfully create a session with the `/sessions` endpoint, the response will have a `urls` object with a `realtime` property. This is the URL that can be passed to the realtime plugin in viewer.js.
 
+```js
+var viewer = Crocodoc.createViewer(element, {
+  url: '<the assets url>',
+  plugins: {
+    realtime: {
+      url: '<the realtime url>'
+    }
+  }
+})
+```
+
+The realtime plugin makes a connection to the View API's realtime event stream, which sends notifications as pages finish converting, which tells viewer.js that those pages are now available to load.
 
 ## Resources
 
