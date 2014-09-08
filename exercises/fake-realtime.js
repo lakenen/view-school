@@ -96,12 +96,13 @@ function handleSSERequest(parsedURL, request, response) {
     var data = {},
       eventName
     if (++i < c) {
-      if (channel.page < channel.numPages) {
+      if (channel.page <= channel.numPages) {
         data.pages = [channel.page++]
         eventName = 'pageavailable.svg'
       } else {
         eventName = 'finished.svg'
         data = ''
+        c = 0
       }
       response.write('id: ' + i + '\n')
       response.write('event: ' + eventName + '\n')
