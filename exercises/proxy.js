@@ -10,6 +10,7 @@ function setupProxy(token) {
       token: token
     , url: process.env.BVBB_URL
     , serveStatic: false
+    , headers: { 'user-agent': 'view-school@' + process.env.VERSION }
   })
 }
 

@@ -7,6 +7,7 @@ browserifyBuiltins.http = require.resolve('http-browserify')
 require('portfinder').getPort(function (err, port) {
   if (err) throw err
   process.env.BVBB_URL = 'http://localhost:' + port + '/1'
+  process.env.VERSION = require('./package').version
   workshopper({
       port: port
     , exercises: require('./exercises')
