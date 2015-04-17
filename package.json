@@ -1,6 +1,6 @@
 {
   "name": "view-school",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "The view-school workshop",
   "main": "index.js",
   "dependencies": {
