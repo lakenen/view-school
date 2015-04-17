@@ -43,6 +43,9 @@ function test(done) {
           cb = opt
           opt = { params: {} }
         }
+        if (opt.retry) {
+          opt.retry = false
+        }
         opt.params.name = 'view-school:05-upload-file'
         var r = this.__.uploadFile(file, opt, function (err, res) {
           if (err) {

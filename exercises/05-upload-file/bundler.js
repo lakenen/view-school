@@ -3,13 +3,13 @@ module.exports = function (b) {
   b.transform(ignorePDF)
 }
 
-var through = require('through2');
+var through = require('through2')
 
 function ignorePDF(file) {
   if (!/\.pdf$/.test(file)) {
     return through()
   }
   return through(function (buf, enc, next) {
-      next();
-  });
+      next()
+  })
 }

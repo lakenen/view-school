@@ -20,6 +20,10 @@ require('portfinder').getPort(function (err, port) {
   })
 })
 
+process.on('uncaughtException', function (err) {
+  console.log('APP IS CRASHING:', err.stack || err)
+});
+
 process.on('exit', exit)
 process.on('SIGINT', function () {
   process.exit()
