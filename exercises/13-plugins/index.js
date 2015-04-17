@@ -138,7 +138,7 @@ function test(done) {
 function setup(done) {
   require('../viewer')
 
-  require('../fullscreen.css')
+  require('../../fullscreen.css')
   require('../../node_modules/viewer/plugins/fullscreen/fullscreen.js')
   require('../../node_modules/viewer/plugins/download/download.js')
   done()

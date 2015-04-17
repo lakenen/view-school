@@ -32,7 +32,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "mkdir -p answers; cd answers; NODE_ENV=development node .."
+    "start": "mkdir -p answers; cd answers; NODE_ENV=development node ..",
+    "postinstall": "node postinstall.js"
   },
   "bin": {
     "view-school": "bin/view-school"
