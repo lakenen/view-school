@@ -6,7 +6,7 @@
   "dependencies": {
     "box-view": "^2.0.0",
     "box-view-browser-bundle": "https://github.com/lakenen/box-view-browser-bundle/tarball/view-school",
-    "browser-workshopper": "^0.0.8",
+    "browser-workshopper": "0.0.11",
     "byte-size": "^0.1.0",
     "concat-stream": "^1.4.6",
     "cssify": "^0.6.0",
@@ -32,7 +32,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "mkdir -p answers; cd answers; NODE_ENV=development node ..",
+    "start": "mkdir -p answers; cd answers; NODE_ENV=development node .. -f",
     "postinstall": "node postinstall.js"
   },
   "bin": {
