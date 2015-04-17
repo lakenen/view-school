@@ -1,11 +1,11 @@
 var workshopper = require('browser-workshopper')
   , path = require('path')
+  , args = require('minimist')(process.argv.slice(2))
 
 var browserifyBuiltins = require('browser-workshopper/node_modules/browserify/lib/builtins')
 browserifyBuiltins.http = require.resolve('http-browserify')
 
-require('portfinder').getPort(function (err, port) {
-  if (err) throw err
+function start(port) {
   process.env.BVBB_URL = 'http://localhost:' + port + '/1'
   process.env.VERSION = require('./package').version
   workshopper({
@@ -18,7 +18,16 @@ require('portfinder').getPort(function (err, port) {
       }
     , mainBundler: require('./bundler')
   })
-})
+}
+
+if (args.p) {
+  start(args.p)
+} else {
+  require('portfinder').getPort(function (err, port) {
+    if (err) throw err
+    start(port)
+  })
+}
 
 process.on('uncaughtException', function (err) {
   console.log('APP IS CRASHING:', err.stack || err)
