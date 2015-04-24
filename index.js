@@ -4,6 +4,7 @@ var workshopper = require('browser-workshopper')
 
 var browserifyBuiltins = require('browser-workshopper/node_modules/browserify/lib/builtins')
 browserifyBuiltins.http = require.resolve('http-browserify')
+browserifyBuiltins._process = require.resolve('process/browser')
 
 function start(port) {
   process.env.BVBB_URL = 'http://localhost:' + port + '/1'
